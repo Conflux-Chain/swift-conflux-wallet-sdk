@@ -1,0 +1,4 @@
+module Scrypt {
+  header "shim.h"
+  export *
+}

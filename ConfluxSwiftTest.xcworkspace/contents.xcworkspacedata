@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:ConfluxOCTest/ConfluxOCTest.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "container:ConfluxSwiftTest/ConfluxSwiftTest.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:ConfluxSDK/ConfluxSDK.xcodeproj">
+   </FileRef>
+</Workspace>

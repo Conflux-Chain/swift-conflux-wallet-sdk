@@ -1,0 +1,17 @@
+framework module ConfluxSDK {
+    umbrella header "ConfluxSDK.h"
+    
+    export *
+    module * { export * }
+    
+    explicit module Private {
+        header "Internal.h"
+        link "crypto"
+    }
+}
+
+module libscrypt [system][extern_c] {
+  header "../ConfluxSDK/libscrypt/libscrypt.h"
+  export *
+}
+

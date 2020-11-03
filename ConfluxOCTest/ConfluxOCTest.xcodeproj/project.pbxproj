@@ -1,0 +1,523 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		833EE31E23FBDBC100CAD85C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 833EE31D23FBDBC100CAD85C /* AppDelegate.m */; };
+		833EE32423FBDBC100CAD85C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833EE32323FBDBC100CAD85C /* ViewController.m */; };
+		833EE32723FBDBC100CAD85C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 833EE32523FBDBC100CAD85C /* Main.storyboard */; };
+		833EE32923FBDBC300CAD85C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 833EE32823FBDBC300CAD85C /* Assets.xcassets */; };
+		833EE32C23FBDBC300CAD85C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 833EE32A23FBDBC300CAD85C /* LaunchScreen.storyboard */; };
+		833EE32F23FBDBC300CAD85C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 833EE32E23FBDBC300CAD85C /* main.m */; };
+		833EE33923FBDBC300CAD85C /* ConfluxOCTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 833EE33823FBDBC300CAD85C /* ConfluxOCTestTests.m */; };
+		833EE34E23FBDCF500CAD85C /* ConfluxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 833EE34D23FBDCF500CAD85C /* ConfluxSDK.framework */; };
+		833EE34F23FBDCF500CAD85C /* ConfluxSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 833EE34D23FBDCF500CAD85C /* ConfluxSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8345A3CA241B935C009DD9C2 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8345A3C7241B9345009DD9C2 /* CryptoSwift.framework */; };
+		8345A3CB241B935C009DD9C2 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8345A3C7241B9345009DD9C2 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8345A3CC241B935E009DD9C2 /* SipHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8345A3C6241B9344009DD9C2 /* SipHash.framework */; };
+		8345A3CD241B935E009DD9C2 /* SipHash.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8345A3C6241B9344009DD9C2 /* SipHash.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		833EE33523FBDBC300CAD85C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 833EE31123FBDBC100CAD85C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 833EE31823FBDBC100CAD85C;
+			remoteInfo = ConfluxOCTest;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		833EE35023FBDCF500CAD85C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				833EE34F23FBDCF500CAD85C /* ConfluxSDK.framework in Embed Frameworks */,
+				8345A3CB241B935C009DD9C2 /* CryptoSwift.framework in Embed Frameworks */,
+				8345A3CD241B935E009DD9C2 /* SipHash.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		833EE31923FBDBC100CAD85C /* ConfluxOCTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConfluxOCTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		833EE31C23FBDBC100CAD85C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		833EE31D23FBDBC100CAD85C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		833EE32223FBDBC100CAD85C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		833EE32323FBDBC100CAD85C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		833EE32623FBDBC100CAD85C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		833EE32823FBDBC300CAD85C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		833EE32B23FBDBC300CAD85C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		833EE32D23FBDBC300CAD85C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		833EE32E23FBDBC300CAD85C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		833EE33423FBDBC300CAD85C /* ConfluxOCTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConfluxOCTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		833EE33823FBDBC300CAD85C /* ConfluxOCTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfluxOCTestTests.m; sourceTree = "<group>"; };
+		833EE33A23FBDBC300CAD85C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		833EE34D23FBDCF500CAD85C /* ConfluxSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ConfluxSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		833EE35523FBE2E200CAD85C /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = ../ConfluxSDK/ConfluxSDK/CryptoSwift.framework; sourceTree = "<group>"; };
+		833EE35623FBE2E200CAD85C /* CryptoEthereumSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoEthereumSwift.framework; path = ../ConfluxSDK/ConfluxSDK/CryptoEthereumSwift.framework; sourceTree = "<group>"; };
+		8345A3C6241B9344009DD9C2 /* SipHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SipHash.framework; sourceTree = "<group>"; };
+		8345A3C7241B9345009DD9C2 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CryptoSwift.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		833EE31623FBDBC100CAD85C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8345A3CA241B935C009DD9C2 /* CryptoSwift.framework in Frameworks */,
+				833EE34E23FBDCF500CAD85C /* ConfluxSDK.framework in Frameworks */,
+				8345A3CC241B935E009DD9C2 /* SipHash.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		833EE33123FBDBC300CAD85C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		833EE31023FBDBC100CAD85C = {
+			isa = PBXGroup;
+			children = (
+				833EE31B23FBDBC100CAD85C /* ConfluxOCTest */,
+				833EE33723FBDBC300CAD85C /* ConfluxOCTestTests */,
+				833EE31A23FBDBC100CAD85C /* Products */,
+				833EE34C23FBDCF500CAD85C /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		833EE31A23FBDBC100CAD85C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				833EE31923FBDBC100CAD85C /* ConfluxOCTest.app */,
+				833EE33423FBDBC300CAD85C /* ConfluxOCTestTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		833EE31B23FBDBC100CAD85C /* ConfluxOCTest */ = {
+			isa = PBXGroup;
+			children = (
+				8345A3C7241B9345009DD9C2 /* CryptoSwift.framework */,
+				8345A3C6241B9344009DD9C2 /* SipHash.framework */,
+				833EE31C23FBDBC100CAD85C /* AppDelegate.h */,
+				833EE31D23FBDBC100CAD85C /* AppDelegate.m */,
+				833EE32223FBDBC100CAD85C /* ViewController.h */,
+				833EE32323FBDBC100CAD85C /* ViewController.m */,
+				833EE32523FBDBC100CAD85C /* Main.storyboard */,
+				833EE32823FBDBC300CAD85C /* Assets.xcassets */,
+				833EE32A23FBDBC300CAD85C /* LaunchScreen.storyboard */,
+				833EE32D23FBDBC300CAD85C /* Info.plist */,
+				833EE32E23FBDBC300CAD85C /* main.m */,
+			);
+			path = ConfluxOCTest;
+			sourceTree = "<group>";
+		};
+		833EE33723FBDBC300CAD85C /* ConfluxOCTestTests */ = {
+			isa = PBXGroup;
+			children = (
+				833EE33823FBDBC300CAD85C /* ConfluxOCTestTests.m */,
+				833EE33A23FBDBC300CAD85C /* Info.plist */,
+			);
+			path = ConfluxOCTestTests;
+			sourceTree = "<group>";
+		};
+		833EE34C23FBDCF500CAD85C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				833EE35623FBE2E200CAD85C /* CryptoEthereumSwift.framework */,
+				833EE35523FBE2E200CAD85C /* CryptoSwift.framework */,
+				833EE34D23FBDCF500CAD85C /* ConfluxSDK.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		833EE31823FBDBC100CAD85C /* ConfluxOCTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 833EE33D23FBDBC300CAD85C /* Build configuration list for PBXNativeTarget "ConfluxOCTest" */;
+			buildPhases = (
+				833EE31523FBDBC100CAD85C /* Sources */,
+				833EE31623FBDBC100CAD85C /* Frameworks */,
+				833EE31723FBDBC100CAD85C /* Resources */,
+				833EE35023FBDCF500CAD85C /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ConfluxOCTest;
+			productName = ConfluxOCTest;
+			productReference = 833EE31923FBDBC100CAD85C /* ConfluxOCTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+		833EE33323FBDBC300CAD85C /* ConfluxOCTestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 833EE34023FBDBC300CAD85C /* Build configuration list for PBXNativeTarget "ConfluxOCTestTests" */;
+			buildPhases = (
+				833EE33023FBDBC300CAD85C /* Sources */,
+				833EE33123FBDBC300CAD85C /* Frameworks */,
+				833EE33223FBDBC300CAD85C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				833EE33623FBDBC300CAD85C /* PBXTargetDependency */,
+			);
+			name = ConfluxOCTestTests;
+			productName = ConfluxOCTestTests;
+			productReference = 833EE33423FBDBC300CAD85C /* ConfluxOCTestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		833EE31123FBDBC100CAD85C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = com.blockchain.dappbirds;
+				TargetAttributes = {
+					833EE31823FBDBC100CAD85C = {
+						CreatedOnToolsVersion = 11.3;
+					};
+					833EE33323FBDBC300CAD85C = {
+						CreatedOnToolsVersion = 11.3;
+						TestTargetID = 833EE31823FBDBC100CAD85C;
+					};
+				};
+			};
+			buildConfigurationList = 833EE31423FBDBC100CAD85C /* Build configuration list for PBXProject "ConfluxOCTest" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 833EE31023FBDBC100CAD85C;
+			productRefGroup = 833EE31A23FBDBC100CAD85C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				833EE31823FBDBC100CAD85C /* ConfluxOCTest */,
+				833EE33323FBDBC300CAD85C /* ConfluxOCTestTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		833EE31723FBDBC100CAD85C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				833EE32C23FBDBC300CAD85C /* LaunchScreen.storyboard in Resources */,
+				833EE32923FBDBC300CAD85C /* Assets.xcassets in Resources */,
+				833EE32723FBDBC100CAD85C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		833EE33223FBDBC300CAD85C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		833EE31523FBDBC100CAD85C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				833EE32423FBDBC100CAD85C /* ViewController.m in Sources */,
+				833EE31E23FBDBC100CAD85C /* AppDelegate.m in Sources */,
+				833EE32F23FBDBC300CAD85C /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		833EE33023FBDBC300CAD85C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				833EE33923FBDBC300CAD85C /* ConfluxOCTestTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		833EE33623FBDBC300CAD85C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 833EE31823FBDBC100CAD85C /* ConfluxOCTest */;
+			targetProxy = 833EE33523FBDBC300CAD85C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		833EE32523FBDBC100CAD85C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				833EE32623FBDBC100CAD85C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		833EE32A23FBDBC300CAD85C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				833EE32B23FBDBC300CAD85C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		833EE33B23FBDBC300CAD85C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		833EE33C23FBDBC300CAD85C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		833EE33E23FBDBC300CAD85C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7CB63Y746M;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ConfluxOCTest",
+				);
+				INFOPLIST_FILE = ConfluxOCTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.blockchain.dappbirds.ConfluxOCTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		833EE33F23FBDBC300CAD85C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7CB63Y746M;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ConfluxOCTest",
+				);
+				INFOPLIST_FILE = ConfluxOCTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.blockchain.dappbirds.ConfluxOCTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		833EE34123FBDBC300CAD85C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7CB63Y746M;
+				INFOPLIST_FILE = ConfluxOCTestTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.blockchain.dappbirds.ConfluxOCTestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConfluxOCTest.app/ConfluxOCTest";
+			};
+			name = Debug;
+		};
+		833EE34223FBDBC300CAD85C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7CB63Y746M;
+				INFOPLIST_FILE = ConfluxOCTestTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.blockchain.dappbirds.ConfluxOCTestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConfluxOCTest.app/ConfluxOCTest";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		833EE31423FBDBC100CAD85C /* Build configuration list for PBXProject "ConfluxOCTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				833EE33B23FBDBC300CAD85C /* Debug */,
+				833EE33C23FBDBC300CAD85C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		833EE33D23FBDBC300CAD85C /* Build configuration list for PBXNativeTarget "ConfluxOCTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				833EE33E23FBDBC300CAD85C /* Debug */,
+				833EE33F23FBDBC300CAD85C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		833EE34023FBDBC300CAD85C /* Build configuration list for PBXNativeTarget "ConfluxOCTestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				833EE34123FBDBC300CAD85C /* Debug */,
+				833EE34223FBDBC300CAD85C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 833EE31123FBDBC100CAD85C /* Project object */;
+}
