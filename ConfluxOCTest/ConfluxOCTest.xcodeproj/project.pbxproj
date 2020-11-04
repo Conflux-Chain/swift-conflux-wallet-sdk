@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,10 +16,8 @@
 		833EE33923FBDBC300CAD85C /* ConfluxOCTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 833EE33823FBDBC300CAD85C /* ConfluxOCTestTests.m */; };
 		833EE34E23FBDCF500CAD85C /* ConfluxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 833EE34D23FBDCF500CAD85C /* ConfluxSDK.framework */; };
 		833EE34F23FBDCF500CAD85C /* ConfluxSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 833EE34D23FBDCF500CAD85C /* ConfluxSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		8345A3CA241B935C009DD9C2 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8345A3C7241B9345009DD9C2 /* CryptoSwift.framework */; };
-		8345A3CB241B935C009DD9C2 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8345A3C7241B9345009DD9C2 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		8345A3CC241B935E009DD9C2 /* SipHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8345A3C6241B9344009DD9C2 /* SipHash.framework */; };
-		8345A3CD241B935E009DD9C2 /* SipHash.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8345A3C6241B9344009DD9C2 /* SipHash.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E9AB18D62552E8CE00CDF109 /* SipHash in Frameworks */ = {isa = PBXBuildFile; productRef = E9AB18D52552E8CE00CDF109 /* SipHash */; };
+		E9AB18D72552E8CE00CDF109 /* SipHash in Embed Frameworks */ = {isa = PBXBuildFile; productRef = E9AB18D52552E8CE00CDF109 /* SipHash */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,9 +37,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				E9AB18D72552E8CE00CDF109 /* SipHash in Embed Frameworks */,
 				833EE34F23FBDCF500CAD85C /* ConfluxSDK.framework in Embed Frameworks */,
-				8345A3CB241B935C009DD9C2 /* CryptoSwift.framework in Embed Frameworks */,
-				8345A3CD241B935E009DD9C2 /* SipHash.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -65,8 +62,6 @@
 		833EE34D23FBDCF500CAD85C /* ConfluxSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ConfluxSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		833EE35523FBE2E200CAD85C /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = ../ConfluxSDK/ConfluxSDK/CryptoSwift.framework; sourceTree = "<group>"; };
 		833EE35623FBE2E200CAD85C /* CryptoEthereumSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoEthereumSwift.framework; path = ../ConfluxSDK/ConfluxSDK/CryptoEthereumSwift.framework; sourceTree = "<group>"; };
-		8345A3C6241B9344009DD9C2 /* SipHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SipHash.framework; sourceTree = "<group>"; };
-		8345A3C7241B9345009DD9C2 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CryptoSwift.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,9 +69,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8345A3CA241B935C009DD9C2 /* CryptoSwift.framework in Frameworks */,
+				E9AB18D62552E8CE00CDF109 /* SipHash in Frameworks */,
 				833EE34E23FBDCF500CAD85C /* ConfluxSDK.framework in Frameworks */,
-				8345A3CC241B935E009DD9C2 /* SipHash.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,8 +106,6 @@
 		833EE31B23FBDBC100CAD85C /* ConfluxOCTest */ = {
 			isa = PBXGroup;
 			children = (
-				8345A3C7241B9345009DD9C2 /* CryptoSwift.framework */,
-				8345A3C6241B9344009DD9C2 /* SipHash.framework */,
 				833EE31C23FBDBC100CAD85C /* AppDelegate.h */,
 				833EE31D23FBDBC100CAD85C /* AppDelegate.m */,
 				833EE32223FBDBC100CAD85C /* ViewController.h */,
@@ -163,6 +155,9 @@
 			dependencies = (
 			);
 			name = ConfluxOCTest;
+			packageProductDependencies = (
+				E9AB18D52552E8CE00CDF109 /* SipHash */,
+			);
 			productName = ConfluxOCTest;
 			productReference = 833EE31923FBDBC100CAD85C /* ConfluxOCTest.app */;
 			productType = "com.apple.product-type.application";
@@ -212,6 +207,9 @@
 				Base,
 			);
 			mainGroup = 833EE31023FBDBC100CAD85C;
+			packageReferences = (
+				E9AB18D42552E8CE00CDF109 /* XCRemoteSwiftPackageReference "SipHash" */,
+			);
 			productRefGroup = 833EE31A23FBDBC100CAD85C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -518,6 +516,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E9AB18D42552E8CE00CDF109 /* XCRemoteSwiftPackageReference "SipHash" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/attaswift/SipHash.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E9AB18D52552E8CE00CDF109 /* SipHash */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E9AB18D42552E8CE00CDF109 /* XCRemoteSwiftPackageReference "SipHash" */;
+			productName = SipHash;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 833EE31123FBDBC100CAD85C /* Project object */;
 }

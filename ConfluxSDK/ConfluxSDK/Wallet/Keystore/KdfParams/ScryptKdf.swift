@@ -5,7 +5,7 @@
 //  Created by Dmitriy Karachentsov on 2/9/18.
 //
 
-import Foundation
+import Scrypt
 
 struct ScryptKdf: Codable {
     var dklen: Int
@@ -18,13 +18,8 @@ struct ScryptKdf: Codable {
 extension ScryptKdf {
     
     func scrypt(password: Data) throws -> Data {
-        let scrypt = try Scrypt.scrypt(
-            password: password,
-            salt: Data(hex: salt),
-            N: n,
-            r: r,
-            p: p,
-            dkLen: dklen)
+        let scrypt = try Scrypt.generateHash(passwordData: password, salt: Data(hex: salt), N: Int(n), r: Int(r), p: Int(p), length: dklen)
+
         return scrypt
     }
     

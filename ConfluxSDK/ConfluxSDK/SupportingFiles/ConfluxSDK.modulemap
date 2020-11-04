@@ -10,8 +10,3 @@ framework module ConfluxSDK {
     }
 }
 
-module libscrypt [system][extern_c] {
-  header "../ConfluxSDK/libscrypt/libscrypt.h"
-  export *
-}
-
