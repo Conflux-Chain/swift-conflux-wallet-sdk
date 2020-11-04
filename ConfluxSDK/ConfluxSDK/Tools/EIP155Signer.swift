@@ -44,7 +44,7 @@ public struct EIP155Signer {
     }
     
     public func encode(rawTransaction: RawTransaction) throws -> Data {
-        var toEncode: [Any] = [
+        let toEncode: [Any] = [
             rawTransaction.nonce,
             rawTransaction.gasPrice,
             rawTransaction.gasLimit,

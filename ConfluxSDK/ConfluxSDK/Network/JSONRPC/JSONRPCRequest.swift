@@ -16,7 +16,7 @@ public protocol JSONRPCRequest {
 }
 
 public extension JSONRPCRequest {
-    public var parameters: Any? {
+    var parameters: Any? {
         return nil
     }
 }

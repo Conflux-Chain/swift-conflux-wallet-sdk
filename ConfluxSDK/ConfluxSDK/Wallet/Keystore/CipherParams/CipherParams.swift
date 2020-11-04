@@ -30,12 +30,12 @@ extension CryptoSwift.Cipher {
     
     func encrypt(input: Data) throws -> Data {
         let encryptedInput = try self.encrypt(input.bytes)
-        return Data(bytes: encryptedInput)
+        return Data(encryptedInput)
     }
     
     func decrypt(input: Data) throws -> Data {
         let encryptedInput = try self.decrypt(input.bytes)
-        return Data(bytes: encryptedInput)
+        return Data(encryptedInput)
     }
     
 }

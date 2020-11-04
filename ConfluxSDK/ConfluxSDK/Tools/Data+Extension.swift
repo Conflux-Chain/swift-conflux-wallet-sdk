@@ -50,6 +50,6 @@ extension Data {
     static func randomBytes(count: Int) -> Data {
         var bytes = [UInt8](repeating: 0, count: count)
         let _  = SecRandomCopyBytes(kSecRandomDefault, bytes.count, &bytes)
-        return Data(bytes: bytes)
+        return Data(bytes)
     }
 }
