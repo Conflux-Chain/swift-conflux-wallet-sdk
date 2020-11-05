@@ -18,15 +18,6 @@
           "revision": "ef96026bfa0b9b8915889e87860bc9f1c6b4d37f",
           "version": "1.0.0"
         }
-      },
-      {
-        "package": "SipHash",
-        "repositoryURL": "https://github.com/attaswift/SipHash.git",
-        "state": {
-          "branch": null,
-          "revision": "e325083424688055363bbfcb7f1a440d7d7a1bae",
-          "version": "1.2.2"
-        }
       }
     ]
   },

@@ -180,10 +180,12 @@
 		83A4692424091F1C00C3A347 /* BigIntEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A4692324091F1C00C3A347 /* BigIntEncoding.swift */; };
 		83A4692624091FF200C3A347 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A4692524091FF200C3A347 /* Data+Extension.swift */; };
 		83A46928240921C400C3A347 /* ConfluxChecksum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A46927240921C400C3A347 /* ConfluxChecksum.swift */; };
-		E90C29B72552E7D20078FCE4 /* SipHash in Frameworks */ = {isa = PBXBuildFile; productRef = E90C29B62552E7D20078FCE4 /* SipHash */; };
-		E90C29B82552E7D20078FCE4 /* SipHash in Embed Frameworks */ = {isa = PBXBuildFile; productRef = E90C29B62552E7D20078FCE4 /* SipHash */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		E9AB18E52552E99900CDF109 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E9AB18E42552E99900CDF109 /* CryptoSwift */; };
 		E9AB18ED2552EE7A00CDF109 /* Scrypt in Frameworks */ = {isa = PBXBuildFile; productRef = E9AB18EC2552EE7A00CDF109 /* Scrypt */; };
+		E9F9882725540C1C009DAE79 /* Primitive Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9882325540C1C009DAE79 /* Primitive Types.swift */; };
+		E9F9882825540C1C009DAE79 /* SipHashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9882425540C1C009DAE79 /* SipHashable.swift */; };
+		E9F9882925540C1C009DAE79 /* RandomUInt64.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9882525540C1C009DAE79 /* RandomUInt64.swift */; };
+		E9F9882A25540C1C009DAE79 /* SipHasher.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9882625540C1C009DAE79 /* SipHasher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,7 +205,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E90C29B82552E7D20078FCE4 /* SipHash in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -389,6 +390,10 @@
 		83A4692324091F1C00C3A347 /* BigIntEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigIntEncoding.swift; sourceTree = "<group>"; };
 		83A4692524091FF200C3A347 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		83A46927240921C400C3A347 /* ConfluxChecksum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfluxChecksum.swift; sourceTree = "<group>"; };
+		E9F9882325540C1C009DAE79 /* Primitive Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Primitive Types.swift"; sourceTree = "<group>"; };
+		E9F9882425540C1C009DAE79 /* SipHashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SipHashable.swift; sourceTree = "<group>"; };
+		E9F9882525540C1C009DAE79 /* RandomUInt64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomUInt64.swift; sourceTree = "<group>"; };
+		E9F9882625540C1C009DAE79 /* SipHasher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SipHasher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -398,7 +403,6 @@
 			files = (
 				8313207B241F850000C9EFDD /* libSystem.tbd in Frameworks */,
 				838DB6A6244EB3F4003AA66E /* libcrypto.a in Frameworks */,
-				E90C29B72552E7D20078FCE4 /* SipHash in Frameworks */,
 				838DB65E244EB3F4003AA66E /* libsecp256k1.a in Frameworks */,
 				E9AB18E52552E99900CDF109 /* CryptoSwift in Frameworks */,
 				E9AB18ED2552EE7A00CDF109 /* Scrypt in Frameworks */,
@@ -665,6 +669,7 @@
 		838DB606244EB3F4003AA66E /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				E9F9882225540C05009DAE79 /* SipHash */,
 				838DB607244EB3F4003AA66E /* secp256k1 */,
 				838DB60F244EB3F4003AA66E /* openssl */,
 			);
@@ -856,6 +861,17 @@
 			path = BigInt;
 			sourceTree = "<group>";
 		};
+		E9F9882225540C05009DAE79 /* SipHash */ = {
+			isa = PBXGroup;
+			children = (
+				E9F9882325540C1C009DAE79 /* Primitive Types.swift */,
+				E9F9882525540C1C009DAE79 /* RandomUInt64.swift */,
+				E9F9882425540C1C009DAE79 /* SipHashable.swift */,
+				E9F9882625540C1C009DAE79 /* SipHasher.swift */,
+			);
+			path = SipHash;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -961,7 +977,6 @@
 			);
 			name = ConfluxSDK;
 			packageProductDependencies = (
-				E90C29B62552E7D20078FCE4 /* SipHash */,
 				E9AB18E42552E99900CDF109 /* CryptoSwift */,
 				E9AB18EC2552EE7A00CDF109 /* Scrypt */,
 			);
@@ -994,7 +1009,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = com.blockchain.dappbirds;
 				TargetAttributes = {
 					833EE28623FBC7E900CAD85C = {
@@ -1016,7 +1031,6 @@
 			);
 			mainGroup = 833EE27D23FBC7E900CAD85C;
 			packageReferences = (
-				E90C29B52552E7D20078FCE4 /* XCRemoteSwiftPackageReference "SipHash" */,
 				E9AB18E32552E99900CDF109 /* XCRemoteSwiftPackageReference "CryptoSwift" */,
 				E9AB18EB2552EE7A00CDF109 /* XCRemoteSwiftPackageReference "Scrypt-Swift" */,
 			);
@@ -1058,6 +1072,7 @@
 				833EE3B323FE572E00CAD85C /* EnglishWords.swift in Sources */,
 				8375C1B923FF87E4003D5A31 /* ConfluxToken.swift in Sources */,
 				833EE36A23FBF8EC00CAD85C /* Method.swift in Sources */,
+				E9F9882725540C1C009DAE79 /* Primitive Types.swift in Sources */,
 				8375C19823FE6587003D5A31 /* DataConvertable.swift in Sources */,
 				83A468EE24091ACD00C3A347 /* ABIType.swift in Sources */,
 				833C516824408EEE006CE52F /* Aes128CtrCipher.swift in Sources */,
@@ -1066,6 +1081,7 @@
 				833EE37023FC0AD000CAD85C /* JSONRPCError.swift in Sources */,
 				8375C19623FE5FD4003D5A31 /* HDPublicKey.swift in Sources */,
 				8345A3BD241B7FCC009DD9C2 /* CryptoConflux.swift in Sources */,
+				E9F9882925540C1C009DAE79 /* RandomUInt64.swift in Sources */,
 				83A4690A24091C6100C3A347 /* Strideable.swift in Sources */,
 				8345A3BC241B7FCC009DD9C2 /* Internal.m in Sources */,
 				833EE39B23FE206C00CAD85C /* Gcfx+Contract.swift in Sources */,
@@ -1095,9 +1111,11 @@
 				83A4691124091C6100C3A347 /* Division.swift in Sources */,
 				83A468EC24091ACD00C3A347 /* ABIDecoder.swift in Sources */,
 				83A4691324091C6100C3A347 /* Codable.swift in Sources */,
+				E9F9882825540C1C009DAE79 /* SipHashable.swift in Sources */,
 				83A4692424091F1C00C3A347 /* BigIntEncoding.swift in Sources */,
 				83A4691024091C6100C3A347 /* Square Root.swift in Sources */,
 				8375C19423FE5F69003D5A31 /* HDPrivateKey.swift in Sources */,
+				E9F9882A25540C1C009DAE79 /* SipHasher.swift in Sources */,
 				833EE3A523FE2F2600CAD85C /* RLP.swift in Sources */,
 				83A4692224091DA900C3A347 /* ConfluxAddress.swift in Sources */,
 				8345A3BB241B7FCC009DD9C2 /* EllipticCurveEncrypterSecp256k1.swift in Sources */,
@@ -1193,6 +1211,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1260,6 +1279,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1474,14 +1494,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E90C29B52552E7D20078FCE4 /* XCRemoteSwiftPackageReference "SipHash" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/attaswift/SipHash.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.2;
-			};
-		};
 		E9AB18E32552E99900CDF109 /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift";
@@ -1501,11 +1513,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E90C29B62552E7D20078FCE4 /* SipHash */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E90C29B52552E7D20078FCE4 /* XCRemoteSwiftPackageReference "SipHash" */;
-			productName = SipHash;
-		};
 		E9AB18E42552E99900CDF109 /* CryptoSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E9AB18E32552E99900CDF109 /* XCRemoteSwiftPackageReference "CryptoSwift" */;
