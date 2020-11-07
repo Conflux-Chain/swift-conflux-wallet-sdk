@@ -11,15 +11,6 @@
         }
       },
       {
-        "package": "Scrypt",
-        "repositoryURL": "https://github.com/matejukmar/Scrypt-Swift",
-        "state": {
-          "branch": null,
-          "revision": "ef96026bfa0b9b8915889e87860bc9f1c6b4d37f",
-          "version": "1.0.0"
-        }
-      },
-      {
         "package": "SipHash",
         "repositoryURL": "https://github.com/attaswift/SipHash.git",
         "state": {
