@@ -23,8 +23,11 @@ let address = cfxWallet.address()
 
 ## Requirements
 
-- Swift 4.0 or later
+- Swift 5 or later
 - iOS 9.0 or later
+
+## Install (Carthage)
+    github "https://github.com/R0uter/swift-conflux-wallet-sdk"
 
 ## Usage
 - Provide usage examples of related methods in Demo ConfluxSwiftTest and ConfluxOCTest
