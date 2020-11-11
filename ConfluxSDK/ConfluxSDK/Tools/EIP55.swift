@@ -24,9 +24,7 @@ public struct EIP55 {
             }
         }
         .joined()
-        print(resultStr)
         resultStr = "1" + resultStr.dropFirst()
-        print(resultStr)
         return resultStr
     }
 }

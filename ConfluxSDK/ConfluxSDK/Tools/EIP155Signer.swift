@@ -18,9 +18,7 @@ public struct EIP155Signer {
     
     public func sign(_ rawTransaction: RawTransaction, privateKey: PrivateKey) throws -> Data {
         let transactionHash = try hash(rawTransaction: rawTransaction)
-        print("transactionHash: \(transactionHash.hexString)")
         let signiture = try privateKey.sign(hash: transactionHash)
-        print("signiture: \(signiture.hexString)")
         let (r, s, v) = calculateRSV(signature: signiture)
         
         let rlp = try RLP.encode([
@@ -36,7 +34,6 @@ public struct EIP155Signer {
             ],
                     v, r, s
         ])
-        print("transactionHash: \(rlp.hexString)")
         return rlp
     }
     public func hash(rawTransaction: RawTransaction) throws -> Data {
@@ -59,7 +56,6 @@ public struct EIP155Signer {
 //            toEncode.append(contentsOf: [chainID, 0, 0 ]) // EIP155
 //        }
         let result = try RLP.encode(toEncode)
-        print(result.hexString)
         return result
     }
 

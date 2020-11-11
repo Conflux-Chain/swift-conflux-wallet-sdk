@@ -213,6 +213,11 @@ extension Wallet {
         return try? Mnemonic.createSeed(mnemonic: mnemonicArr)
     }
     
+    /// 使用 seed 创建钱包
+    /// - Parameters:
+    ///   - seed: 种子
+    ///   - completion: 回调， 是否成功，钱包地址，用户私钥
+    /// - Returns: void
     @objc public func creatWalletBy(by seed: Data, completion:@escaping (_ success: Bool, _ address:String?, _ PrivateKey: String?) -> ()) {
         guard let cfxWallet = try? Wallet.init(seed: seed, network: self.network, printDebugLog: true) else {
             completion(false, nil, nil)
@@ -277,7 +282,6 @@ extension Wallet {
                         storageSelf.getGcfx().getEpochNumber { (result) in
                             switch result {
                             case .success(let epochHeight):
-                                print(epochHeight)
                                 let rawTransaction = ConfluxSDK.RawTransaction.init(value: sendValueIntDrip, to: toAddress, gasPrice: Converter.toDrip(Gdrip: gasPrice), gasLimit: gasLimit, nonce: nonce, storageLimit: storageLimit, epochHeight: Drip(epochHeight), chainId: storageSelf.network.chainID)
                                 guard let transactionHash = try? cfxWellet.sign(rawTransaction: rawTransaction) else {
                                     print(" sign transaction failure")
@@ -422,7 +426,6 @@ extension Wallet {
                                     switch result {
                                     case .success(let hash):
                                         completion(true, hash.id, nil)
-                                        print(hash)
                                     case .failure(_):
                                         completion(false, nil, "send transaction failure")
                                     }
