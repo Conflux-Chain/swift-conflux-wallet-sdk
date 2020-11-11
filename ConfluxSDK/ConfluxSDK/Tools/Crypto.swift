@@ -6,7 +6,6 @@
 //  Copyright © 2020 com.blockchain.dappbirds. All rights reserved.
 //
 
-import CryptoSwift
 
 public final class Crypto {
     

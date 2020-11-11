@@ -1,6 +1,5 @@
 import ConfluxSDK.Private
 import secp256k1
-import CryptoSwift
 
 public enum CryptoConfluxSwiftError: Error {
     case failedToSign
