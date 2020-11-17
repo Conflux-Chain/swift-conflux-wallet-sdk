@@ -200,7 +200,7 @@ extension Wallet {
     var network: Network
     
     @objc public init(netName: String, chainId: Int, nodePoint: String, isDebug: Bool) {
-        self.network = Network.init(name: "testnet", chainID: chainId, testUse: isDebug) ?? Network.mainnet
+        self.network = Network.init(name: netName, chainID: chainId, testUse: isDebug) ?? Network.mainnet
         self.isMainNet = !isDebug
         self.nodeEndpoint = nodePoint
     }
@@ -235,7 +235,7 @@ extension Wallet {
     }
     
     @objc public func getBalance(privateKey: String, completion:@escaping (_ success: Bool, _ balance:String?) -> ()) {
-        guard let cfxWallet = try? Wallet.init(network: self.network, privateKey: privateKey, printDebugLog: isMainNet) else {
+        guard let cfxWallet = try? Wallet.init(network: self.network, privateKey: privateKey, printDebugLog: !isMainNet) else {
             completion(false, nil)
             return
         }
@@ -255,12 +255,21 @@ extension Wallet {
     }
     
     private func getGcfx() -> Gcfx {
-        let configuration = ConfluxSDK.Configuration(network: self.network, nodeEndpoint: self.nodeEndpoint, debugPrints: isMainNet)
+        let configuration = ConfluxSDK.Configuration(network: self.network, nodeEndpoint: self.nodeEndpoint, debugPrints: !isMainNet)
         return Gcfx(configuration: configuration)
     }
-        
+
+    /// 给其他用户转账 CFX
+    /// - Parameters:
+    ///   - privateKey: 用户的私钥
+    ///   - toAddress: 目标地址
+    ///   - sendValue: 要发送的金额
+    ///   - gasPrice: gas
+    ///   - gasLimit: gas limit
+    ///   - completion: 发送是否成功，如果成功则返回交易hash，如果失败则返回原因
+    /// - Returns: 无
     @objc public func sendCfxToAddress(privateKey: String, toAddress: String, sendValue: String, gasPrice: Int, gasLimit: Int, completion:@escaping (_ success: Bool, _ hash:String?, _ msg: String?) -> ()) {
-        guard let cfxWellet = try? Wallet.init(network: self.network, privateKey: privateKey, printDebugLog: true) else {
+        guard let cfxWellet = try? Wallet.init(network: self.network, privateKey: privateKey, printDebugLog: !isMainNet) else {
             completion(false, nil, "creat wallet failiure")
             return
         }
@@ -390,6 +399,17 @@ extension Wallet {
         }
     }
     
+    /// 给合约币转账
+    /// - Parameters:
+    ///   - privateKeyStr: 当前用户私钥
+    ///   - contractAddress: 合约地址
+    ///   - toAddress: 目标用户地址
+    ///   - gasPrice: gas
+    ///   - gasLimit: gas limit
+    ///   - sendValue: 发送的金额
+    ///   - decimal: 合约的 decimal
+    ///   - completion: 发送是否成功，如果成功则返回交易hash，如果失败则返回原因
+    /// - Returns: 无
     @objc public func sendToken(privateKeyStr: String, contractAddress: String, toAddress: String, gasPrice: Int, gasLimit: Int, sendValue: String, decimal: Int, completion:@escaping (_ success: Bool, _ hash:String?, _ msg: String?) -> ()) {
 //        let sendValue = BInt(Double(0.0) * pow(10, Double(decimal)))
         let powCustome = pow(Decimal(10), decimal)
@@ -400,7 +420,7 @@ extension Wallet {
         let data = ConfluxToken.ContractFunctions.transfer(address: toAddress, amount: formatSendValue).data
         let formatgGasPrice = Converter.toDrip(Gdrip: gasPrice)
         
-        guard let cfxWellet = try? Wallet.init(network: self.network, privateKey: privateKeyStr, printDebugLog: true) else {
+        guard let cfxWellet = try? Wallet.init(network: self.network, privateKey: privateKeyStr, printDebugLog: !isMainNet) else {
             completion(false, nil, "creat wallet failiure")
             return
         }
