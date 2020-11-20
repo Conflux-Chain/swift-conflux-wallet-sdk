@@ -223,4 +223,27 @@ public final class JSONRPC {
         }
     }
     
+    public struct GetTransactionStatusByHash: JSONRPCRequest {
+        public typealias Response = Int
+        
+        public let transactionHash: String
+        
+        public var method: String {
+            return "cfx_getTransactionByHash"
+        }
+        
+        public var parameters: Any? {
+            return [transactionHash]
+        }
+        
+        public func response(from resultObject: Any) throws -> Response {
+            guard let response = resultObject as? Dictionary<String, Any>,
+                  let status =  response["status"] as? Int
+            else{
+                throw JSONRPCError.unexpectedTypeObject(resultObject)
+            }
+                        
+            return status
+        }
+    }
 }

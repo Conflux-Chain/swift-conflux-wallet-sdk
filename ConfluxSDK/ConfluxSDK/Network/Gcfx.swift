@@ -112,4 +112,9 @@ public final class Gcfx {
         )
         httpClient.send(request, completionHandler: completionHandler)
     }
+    
+    public func getTransactionStatus(by hash:String, completionHandler: @escaping (Result<Int>)->()) {
+        let request = JSONRPC.GetTransactionStatusByHash(transactionHash: hash)
+        httpClient.send(request, completionHandler: completionHandler)
+    }
 }
