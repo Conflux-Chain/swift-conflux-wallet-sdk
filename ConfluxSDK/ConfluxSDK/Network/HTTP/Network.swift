@@ -80,7 +80,7 @@ public enum Network {
     public var chainID: Int {
         switch self {
         case .mainnet:
-            return 1
+            return 1029
         case .testnet:
             return 0
         case .private(let chainID, _):

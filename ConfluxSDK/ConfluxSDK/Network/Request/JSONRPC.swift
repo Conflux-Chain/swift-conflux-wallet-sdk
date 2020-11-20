@@ -107,7 +107,7 @@ public final class JSONRPC {
 
     
     public struct GetEstimatGas: JSONRPCRequest {
-        public typealias Response = (gasUsed:Drip, storageCollateralized: Drip)
+        public typealias Response = (gasUsed:Drip, gasLimit:Drip, storageCollateralized: Drip)
         
         public let from: String?
         public let to: String?
@@ -154,15 +154,21 @@ public final class JSONRPC {
         }
         
         public func response(from resultObject: Any) throws -> Response {
-            guard let response = resultObject as? Dictionary<String, Any>, let gasUsedStr =  response["gasUsed"] as? String, let storageCollateralizedStr = response["storageCollateralized"] as? String else{
+            guard let response = resultObject as? Dictionary<String, Any>,
+                  let gasUsedStr =  response["gasUsed"] as? String,
+                  let storageCollateralizedStr = response["storageCollateralized"] as? String,
+                  let gasLimitStr = response["gasLimit"] as? String
+            else{
                 throw JSONRPCError.unexpectedTypeObject(resultObject)
             }
             
-            guard let gasUsed = Drip(gasUsedStr.lowercased().cfxStripHexPrefix(), radix: 16) , let storageCollateralized = Drip(storageCollateralizedStr.lowercased().cfxStripHexPrefix(), radix: 16) else {
+            guard let gasUsed = Drip(gasUsedStr.lowercased().cfxStripHexPrefix(), radix: 16) , let storageCollateralized = Drip(storageCollateralizedStr.lowercased().cfxStripHexPrefix(), radix: 16),
+                  let gasLimit = Drip(gasLimitStr.lowercased().cfxStripHexPrefix(), radix: 16)
+            else {
                 throw JSONRPCError.unexpectedTypeObject(resultObject)
             }
                         
-            return (gasUsed: gasUsed, storageCollateralized: storageCollateralized)
+            return (gasUsed: gasUsed, gasLimit:gasLimit, storageCollateralized: storageCollateralized)
         }
     }
     

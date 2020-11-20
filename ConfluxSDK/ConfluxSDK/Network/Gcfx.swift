@@ -100,7 +100,7 @@ public final class Gcfx {
     ///   - value: value in drip
     ///   - data: data to include in tx
     ///   - completionHandler:
-    public func  getEstimateGas(from: String? = nil, to: String? = nil, gasLimit: String? = nil, gasPrice: String? = nil, value: String? = nil, data: String? = nil, nonce: String?, completionHandler: @escaping (Result<(gasUsed:Drip, storageCollateralized: Drip)>) -> Void) {
+    public func  getEstimateGas(from: String? = nil, to: String? = nil, gasLimit: String? = nil, gasPrice: String? = nil, value: String? = nil, data: String? = nil, nonce: String?, completionHandler: @escaping (Result<(gasUsed:Drip, gasLimit:Drip, storageCollateralized: Drip)>) -> Void) {
         let request = JSONRPC.GetEstimatGas(
             from: from,
             to: to,

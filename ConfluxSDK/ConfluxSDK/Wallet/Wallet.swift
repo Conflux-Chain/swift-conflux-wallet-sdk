@@ -264,8 +264,8 @@ extension Wallet {
     ///   - privateKey: 用户的私钥
     ///   - toAddress: 目标地址
     ///   - sendValue: 要发送的金额
-    ///   - gasPrice: gas
-    ///   - gasLimit: gas limit
+    ///   - gasPrice: gas 单位 Drip
+    ///   - gasLimit: gas limit 单位 Drip
     ///   - completion: 发送是否成功，如果成功则返回交易hash，如果失败则返回原因
     /// - Returns: 无
     @objc public func sendCfxToAddress(privateKey: String, toAddress: String, sendValue: String, gasPrice: Int, gasLimit: Int, completion:@escaping (_ success: Bool, _ hash:String?, _ msg: String?) -> ()) {
@@ -291,7 +291,7 @@ extension Wallet {
                         storageSelf.getGcfx().getEpochNumber { (result) in
                             switch result {
                             case .success(let epochHeight):
-                                let rawTransaction = ConfluxSDK.RawTransaction.init(value: sendValueIntDrip, to: toAddress, gasPrice: Converter.toDrip(Gdrip: gasPrice), gasLimit: gasLimit, nonce: nonce, storageLimit: storageLimit, epochHeight: Drip(epochHeight), chainId: storageSelf.network.chainID)
+                                let rawTransaction = ConfluxSDK.RawTransaction.init(value: sendValueIntDrip, to: toAddress, gasPrice: gasPrice, gasLimit: gasLimit, nonce: nonce, storageLimit: storageLimit, epochHeight: Drip(epochHeight), chainId: storageSelf.network.chainID)
                                 guard let transactionHash = try? cfxWellet.sign(rawTransaction: rawTransaction) else {
                                     print(" sign transaction failure")
                                     return
@@ -348,7 +348,7 @@ extension Wallet {
             switch result {
             case .success(let nonce):
                 let formatSendValue = try! Converter.toDrip(cfx: sendValue).hexStringWithPrefix
-                let formatGasPrice = Converter.toDrip(Gdrip: gasPrice).hexStringWithPrefix
+                let formatGasPrice = gasPrice.hexStringWithPrefix
                 let hexNonce = nonce.hexStringWithPrefix
                 storageSelf.getGcfx().getEstimateGas(from: fromAddress, to: toAddress, gasPrice: formatGasPrice, value: formatSendValue, nonce: hexNonce) { (result) in
                     switch result {
@@ -404,21 +404,22 @@ extension Wallet {
     ///   - privateKeyStr: 当前用户私钥
     ///   - contractAddress: 合约地址
     ///   - toAddress: 目标用户地址
-    ///   - gasPrice: gas
-    ///   - gasLimit: gas limit
-    ///   - sendValue: 发送的金额
+    ///   - gasPrice: gas 单位 Drip
+    ///   - gasLimit: gas limit 单位 Drip
+    ///   - sendValue: 发送的金额 对应币单位，会自动根据decimal换算成 Drip 的
     ///   - decimal: 合约的 decimal
     ///   - completion: 发送是否成功，如果成功则返回交易hash，如果失败则返回原因
     /// - Returns: 无
     @objc public func sendToken(privateKeyStr: String, contractAddress: String, toAddress: String, gasPrice: Int, gasLimit: Int, sendValue: String, decimal: Int, completion:@escaping (_ success: Bool, _ hash:String?, _ msg: String?) -> ()) {
 //        let sendValue = BInt(Double(0.0) * pow(10, Double(decimal)))
         let powCustome = pow(Decimal(10), decimal)
-        guard let decimalConflux = Decimal(string: sendValue), let formatSendValue = Drip((decimalConflux * powCustome).description) else {
+        guard let decimalConflux = Decimal(string: sendValue),
+              let formatSendValue = Drip((decimalConflux * powCustome).description)
+        else {
             completion(false, nil, "value trans failiure")
             return
         }
         let data = ConfluxToken.ContractFunctions.transfer(address: toAddress, amount: formatSendValue).data
-        let formatgGasPrice = Converter.toDrip(Gdrip: gasPrice)
         
         guard let cfxWellet = try? Wallet.init(network: self.network, privateKey: privateKeyStr, printDebugLog: !isMainNet) else {
             completion(false, nil, "creat wallet failiure")
@@ -432,12 +433,12 @@ extension Wallet {
                     switch result {
                     case .success(let res):
                         let storageLimit = res.storageCollateralized
-                        
+                        let gasLimit = res.gasLimit.toInt()!
                         storageSelf.getGcfx().getEpochNumber { (result) in
                             switch result {
                             case .success(let epochHeight):
                                 let chainId = storageSelf.getGcfx().chainId
-                                let rawTransaction = ConfluxSDK.RawTransaction.init(drip: "0", to: contractAddress, gasPrice: formatgGasPrice, gasLimit: gasLimit, nonce: nonce, data: data, storageLimit: storageLimit, epochHeight: Drip(epochHeight), chainId: chainId)
+                                let rawTransaction = ConfluxSDK.RawTransaction.init(drip: "0", to: contractAddress, gasPrice: gasPrice, gasLimit: gasLimit, nonce: nonce, data: data, storageLimit: storageLimit, epochHeight: Drip(epochHeight), chainId: chainId)
                                 guard let transactionHash = try? cfxWellet.sign(rawTransaction: rawTransaction) else {
                                     completion(false, nil, "sign transaction failure")
                                     return
@@ -446,7 +447,8 @@ extension Wallet {
                                     switch result {
                                     case .success(let hash):
                                         completion(true, hash.id, nil)
-                                    case .failure(_):
+                                    case .failure(let e):
+                                        print(e)
                                         completion(false, nil, "send transaction failure")
                                     }
                                 }
