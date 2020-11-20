@@ -405,7 +405,7 @@ public struct BInt: SignedNumeric, // Implies Numeric, Equatable, ExpressibleByI
     //
 
     ///    Returns BInt value as an integer, if possible.
-    func toInt() -> Int? {
+    public func toInt() -> Int? {
         //    Conversion only works when self has only one limb thats smaller or
         //    equal to abs(Int.min).
 
