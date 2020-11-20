@@ -47,9 +47,8 @@ public class HTTPClient: HTTPClientType {
         case .success(let urlRequest):
             let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
                 let result = request.buildResponse(from: data, response: response, error: error)
-                DispatchQueue.main.async {
-                    completionHandler(self.intercept(request, result: result))
-                }
+                completionHandler(self.intercept(request, result: result))
+                
             }
             
             task.resume()
