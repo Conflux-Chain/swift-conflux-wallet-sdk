@@ -238,12 +238,13 @@ public final class JSONRPC {
         
         public func response(from resultObject: Any) throws -> Response {
             guard let response = resultObject as? Dictionary<String, Any>,
-                  let status =  response["status"] as? Int
+                  let status =  response["status"] as? String,
+                  let code = Int(status.dropFirst(2), radix: 16)
             else{
                 throw JSONRPCError.unexpectedTypeObject(resultObject)
             }
                         
-            return status
+            return code
         }
     }
 }
