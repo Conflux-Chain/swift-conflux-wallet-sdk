@@ -28,68 +28,6 @@ public struct ConfluxToken {
         self.symbol = symbol
     }
     
-    /// Length of 256 bits
-    private static var lengthOf256bits: Int {
-        return 256 / 4
-    }
-    
-    /// Generate transaction data for ERC20 token
-    ///
-    /// - Parameter:
-    ///    - toAddress: address you are transfering to
-    ///    - amount: amount to send
-    /// - Returns: transaction data
-    public func generateDataParameter(toAddress: String, amount: String) throws -> Data {
-        let poweredAmount = try power(amount: amount)
-        return ConfluxToken.ContractFunctions.transfer(address: toAddress, amount: poweredAmount).data
-    }
-    
-    /// Power the amount by the decimal
-    ///
-    /// - Parameter:
-    ///    - amount: amount in string format
-    /// - Returns: BigInt value powered by (10 * decimal)
-    private func power(amount: String) throws -> BInt {
-        let components = amount.split(separator: ".")
-        
-        // components.count must be 1 or 2. this method accepts only integer or decimal value
-        // like 1, 10, 100 or 1.15, 10.7777, 19.9999
-        guard components.count == 1 || components.count == 2 else {
-            throw ConfluxError.contractError(.containsInvalidCharactor(amount))
-        }
-        
-        guard let integer = BInt(String(components[0]), radix: 10) else {
-            throw ConfluxError.contractError(.containsInvalidCharactor(amount))
-        }
-        
-        let poweredInteger = integer * (BInt(10) ** decimal)
-        
-        if components.count == 2 {
-            let count = components[1].count
-            
-            guard count <= decimal else {
-                throw ConfluxError.contractError(.invalidDecimalValue(amount))
-            }
-            
-            guard let digit = BInt(String(components[1]), radix: 10) else {
-                throw ConfluxError.contractError(.containsInvalidCharactor(amount))
-            }
-            
-            let poweredDigit = digit * (BInt(10) ** (decimal - count))
-            return poweredInteger + poweredDigit
-        } else {
-            return poweredInteger
-        }
-    }
-    
-    /// Pad left spaces out of 256bits with 0
-    internal static func pad(string: String) -> String {
-        var string = string
-        while string.count != lengthOf256bits {
-            string = "0" + string
-        }
-        return string
-    }
 }
 
 
@@ -98,36 +36,71 @@ extension ConfluxToken {
         case balanceOf(address: String)
         case transfer(address: String, amount: BInt)
         case decimals
+        case redpacket(redpacketAddress: String,
+                       amount: BInt,
+                       mode:Int,
+                       number:Int,
+                       whiteCount:Int,
+                       rootHash:String,
+                       msg:String)
         
-        var methodSignature: Data {
+        case redpacketCFX(mode:Int,
+                          number:Int,
+                          whiteCount:Int,
+                          rootHash:String,
+                          msg:String)
+        
+
+        var tokenFunction:Function {
             switch self {
             case .balanceOf:
-                return generateSignature(method: "balanceOf(address)")
+                return Function(name: "balanceOf", parameters: [.address])
             case .transfer:
-                return generateSignature(method: "transfer(address,uint256)")
+                return Function(name: "transfer", parameters: [.address, .uint(bits: 256)])
             case .decimals:
-                return generateSignature(method: "decimals()")
+                return Function(name: "decimals", parameters: [])
+            case .redpacket:
+                return Function(name: "send", parameters: [.address, .uint(bits: 256), .bytes(32)])
+            case .redpacketCFX:
+                return Function(name: "create", parameters: [.uint(bits: 8), .uint(bits: 256),.uint(bits: 256),.bytes(32),.string])
             }
         }
-        
-        private func generateSignature(method: String) -> Data {
-            return method.data(using: .ascii)!.sha3(.keccak256)[0...3]
-        }
+
         
         public var data: Data {
+            let encoder = ABIEncoder()
+            
             switch self {
             case .balanceOf(let address):
-                let noHexAddress = ConfluxToken.pad(string: address.cfxStripHexPrefix())
-                let result = Data(hex: methodSignature.toHexString() + noHexAddress)
-                return result
+                try! encoder.encode(function: tokenFunction, arguments: [ConfluxAddress(string: address)!])
                 
             case .transfer(let toAddress, let poweredAmount):
-                let address = ConfluxToken.pad(string: toAddress.cfxStripHexPrefix())
-                let amount = ConfluxToken.pad(string: poweredAmount.serialize().toHexString())
-                return Data(hex: methodSignature.toHexString() + address + amount)
+                try! encoder.encode(function: tokenFunction, arguments: [ConfluxAddress(string: toAddress)!, poweredAmount])
+
             case .decimals:
-                return Data(hex: methodSignature.toHexString())
+                try! encoder.encode(function: tokenFunction, arguments: [])
+
+            case .redpacket(let redpacketAddress, let poweredAmount, _,
+                                let number, let whiteCount, let rootHash, let msg):
+                
+                let encoder1 = ABIEncoder()
+                try! encoder1.encode(tuple: [
+                    .uint(bits: 8, 0),
+                    .uint(bits: 256, BigUInt(number)),
+                    .uint(bits: 256, BigUInt(whiteCount)),
+                    .bytes(Data(hexString: rootHash)!),
+                    .string(msg)
+                ])
+
+                try! encoder.encode(function: tokenFunction, arguments: [ConfluxAddress(string: redpacketAddress)!, poweredAmount, encoder1.data])
+                                
+                
+            case .redpacketCFX(let mode, let number, let whiteCount, let rootHash, let msg):
+
+                try! encoder.encode(function: tokenFunction, arguments: [mode, number, whiteCount, Data(hexString: rootHash)!, msg])
+                    
             }
+            return encoder.data
         }
     }
 }
