@@ -7,7 +7,6 @@
 //
 
 public struct ConfluxToken {
-    
     /// Represents a contract address of token
     public let contractAddress: String
     
@@ -27,31 +26,30 @@ public struct ConfluxToken {
         self.decimal = decimal
         self.symbol = symbol
     }
-    
 }
 
-
-extension ConfluxToken {
-    public enum ContractFunctions {
+public extension ConfluxToken {
+    enum ContractFunctions {
         case balanceOf(address: String)
         case transfer(address: String, amount: BInt)
         case decimals
         case redpacket(redpacketAddress: String,
                        amount: BInt,
-                       mode:Int,
-                       number:Int,
-                       whiteCount:Int,
-                       rootHash:String,
-                       msg:String)
+                       mode: Int,
+                       number: Int,
+                       whiteCount: Int,
+                       rootHash: String,
+                       msg: String)
         
-        case redpacketCFX(mode:Int,
-                          number:Int,
-                          whiteCount:Int,
-                          rootHash:String,
-                          msg:String)
+        case redpacketCFX(mode: Int,
+                          number: Int,
+                          whiteCount: Int,
+                          rootHash: String,
+                          msg: String)
         
-
-        var tokenFunction:Function {
+        case rob(redPacketID: Int, location: Int, proof: String)
+        
+        var tokenFunction: Function {
             switch self {
             case .balanceOf:
                 return Function(name: "balanceOf", parameters: [.address])
@@ -62,11 +60,12 @@ extension ConfluxToken {
             case .redpacket:
                 return Function(name: "send", parameters: [.address, .uint(bits: 256), .bytes(32)])
             case .redpacketCFX:
-                return Function(name: "create", parameters: [.uint(bits: 8), .uint(bits: 256),.uint(bits: 256),.bytes(32),.string])
+                return Function(name: "create", parameters: [.uint(bits: 8), .uint(bits: 256), .uint(bits: 256), .bytes(32), .string])
+            case .rob:
+                return Function(name: "rob", parameters: [.uint(bits: 256), .uint(bits: 256), .bytes(32)])
             }
         }
 
-        
         public var data: Data {
             let encoder = ABIEncoder()
             
@@ -75,13 +74,13 @@ extension ConfluxToken {
                 try! encoder.encode(function: tokenFunction, arguments: [ConfluxAddress(string: address)!])
                 
             case .transfer(let toAddress, let poweredAmount):
-                try! encoder.encode(function: tokenFunction, arguments: [ConfluxAddress(string: toAddress)!, poweredAmount])
+                try! encoder.encode(function: tokenFunction, arguments: [ConfluxAddress(string: toAddress)!, BigUInt(poweredAmount)])
 
             case .decimals:
                 try! encoder.encode(function: tokenFunction, arguments: [])
 
             case .redpacket(let redpacketAddress, let poweredAmount, _,
-                                let number, let whiteCount, let rootHash, let msg):
+                            let number, let whiteCount, let rootHash, let msg):
                 
                 let encoder1 = ABIEncoder()
                 try! encoder1.encode(tuple: [
@@ -92,13 +91,14 @@ extension ConfluxToken {
                     .string(msg)
                 ])
 
-                try! encoder.encode(function: tokenFunction, arguments: [ConfluxAddress(string: redpacketAddress)!, poweredAmount, encoder1.data])
+                try! encoder.encode(function: tokenFunction, arguments: [ConfluxAddress(string: redpacketAddress)!, BigUInt(poweredAmount), encoder1.data])
                                 
-                
             case .redpacketCFX(let mode, let number, let whiteCount, let rootHash, let msg):
 
-                try! encoder.encode(function: tokenFunction, arguments: [mode, number, whiteCount, Data(hexString: rootHash)!, msg])
-                    
+                try! encoder.encode(function: tokenFunction, arguments: [BigUInt(mode), BigUInt(number), BigUInt(whiteCount), Data(hexString: rootHash)!, msg])
+                
+            case .rob(let id, let location, let proof):
+                try! encoder.encode(function: tokenFunction, arguments: [BigUInt(id), BigUInt(location), Data(hexString: proof)!])
             }
             return encoder.data
         }
