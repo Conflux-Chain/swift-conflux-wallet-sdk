@@ -34,6 +34,7 @@ public extension ConfluxToken {
         case transfer(address: String, amount: BInt)
         case decimals
         case redpacket(redpacketAddress: String,
+                       groupId: Int,
                        amount: BInt,
                        mode: Int,
                        number: Int,
@@ -42,6 +43,7 @@ public extension ConfluxToken {
                        msg: String)
         
         case redpacketCFX(mode: Int,
+                          groupId: Int,
                           number: Int,
                           whiteCount: Int,
                           rootHash: String,
@@ -58,11 +60,11 @@ public extension ConfluxToken {
             case .decimals:
                 return Function(name: "decimals", parameters: [])
             case .redpacket:
-                return Function(name: "send", parameters: [.address, .uint(bits: 256), .bytes(32)])
+                return Function(name: "send", parameters: [.address, .uint(bits: 256), .dynamicBytes])
             case .redpacketCFX:
-                return Function(name: "create", parameters: [.uint(bits: 8), .uint(bits: 256), .uint(bits: 256), .bytes(32), .string])
+                return Function(name: "create", parameters: [.uint(bits: 8), .uint(bits: 256), .uint(bits: 256), .uint(bits: 256), .bytes(32), .string])
             case .rob:
-                return Function(name: "rob", parameters: [.uint(bits: 256), .uint(bits: 256), .bytes(32)])
+                return Function(name: "rob", parameters: [.uint(bits: 256), .uint(bits: 256), .dynamicArray(.bytes(32))])
             }
         }
 
@@ -79,12 +81,14 @@ public extension ConfluxToken {
             case .decimals:
                 try! encoder.encode(function: tokenFunction, arguments: [])
 
-            case .redpacket(let redpacketAddress, let poweredAmount, _,
+            case .redpacket(let redpacketAddress, let groupId, let poweredAmount, let mode,
                             let number, let whiteCount, let rootHash, let msg):
                 
                 let encoder1 = ABIEncoder()
+                
                 try! encoder1.encode(tuple: [
-                    .uint(bits: 8, 0),
+                    .uint(bits: 8, BigUInt(mode)),
+                    .uint(bits: 256, BigUInt(groupId)),
                     .uint(bits: 256, BigUInt(number)),
                     .uint(bits: 256, BigUInt(whiteCount)),
                     .bytes(Data(hexString: rootHash)!),
@@ -92,15 +96,18 @@ public extension ConfluxToken {
                 ])
 
                 try! encoder.encode(function: tokenFunction, arguments: [ConfluxAddress(string: redpacketAddress)!, BigUInt(poweredAmount), encoder1.data])
+                //这里encode会丢失data的数据，我们单独拼接一下，由于有padding，去掉padding即可
+                return encoder.data + encoder1.data.dropFirst(32)
                                 
-            case .redpacketCFX(let mode, let number, let whiteCount, let rootHash, let msg):
+            case .redpacketCFX(let mode, let groupId, let number, let whiteCount, let rootHash, let msg):
 
-                try! encoder.encode(function: tokenFunction, arguments: [BigUInt(mode), BigUInt(number), BigUInt(whiteCount), Data(hexString: rootHash)!, msg])
+                try! encoder.encode(function: tokenFunction, arguments: [BigUInt(mode), BigUInt(groupId), BigUInt(number), BigUInt(whiteCount), Data(hexString: rootHash)!, msg])
                 
             case .rob(let id, let location, let proof):
                 try! encoder.encode(function: tokenFunction, arguments: [BigUInt(id), BigUInt(location), Data(hexString: proof)!])
             }
             return encoder.data
+            
         }
     }
 }
