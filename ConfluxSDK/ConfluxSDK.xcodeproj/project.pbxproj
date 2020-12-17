@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -180,7 +180,7 @@
 		83A4692424091F1C00C3A347 /* BigIntEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A4692324091F1C00C3A347 /* BigIntEncoding.swift */; };
 		83A4692624091FF200C3A347 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A4692524091FF200C3A347 /* Data+Extension.swift */; };
 		83A46928240921C400C3A347 /* ConfluxChecksum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A46927240921C400C3A347 /* ConfluxChecksum.swift */; };
-		E9D3B0DB2579C9AB00AC1A28 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9D3B0DA2579C9AB00AC1A28 /* CryptoSwift.framework */; };
+		E9DA1C6F258A349A006B50B3 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E9DA1C6E258A349A006B50B3 /* CryptoSwift */; };
 		E9F9882725540C1C009DAE79 /* Primitive Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9882325540C1C009DAE79 /* Primitive Types.swift */; };
 		E9F9882825540C1C009DAE79 /* SipHashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9882425540C1C009DAE79 /* SipHashable.swift */; };
 		E9F9882925540C1C009DAE79 /* RandomUInt64.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9882525540C1C009DAE79 /* RandomUInt64.swift */; };
@@ -389,7 +389,6 @@
 		83A4692324091F1C00C3A347 /* BigIntEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigIntEncoding.swift; sourceTree = "<group>"; };
 		83A4692524091FF200C3A347 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		83A46927240921C400C3A347 /* ConfluxChecksum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfluxChecksum.swift; sourceTree = "<group>"; };
-		E9D3B0DA2579C9AB00AC1A28 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = ../../Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		E9F9882325540C1C009DAE79 /* Primitive Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Primitive Types.swift"; sourceTree = "<group>"; };
 		E9F9882425540C1C009DAE79 /* SipHashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SipHashable.swift; sourceTree = "<group>"; };
 		E9F9882525540C1C009DAE79 /* RandomUInt64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomUInt64.swift; sourceTree = "<group>"; };
@@ -402,9 +401,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8313207B241F850000C9EFDD /* libSystem.tbd in Frameworks */,
+				E9DA1C6F258A349A006B50B3 /* CryptoSwift in Frameworks */,
 				838DB6A6244EB3F4003AA66E /* libcrypto.a in Frameworks */,
 				838DB65E244EB3F4003AA66E /* libsecp256k1.a in Frameworks */,
-				E9D3B0DB2579C9AB00AC1A28 /* CryptoSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -668,7 +667,6 @@
 		838DB606244EB3F4003AA66E /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				E9D3B0DA2579C9AB00AC1A28 /* CryptoSwift.framework */,
 				E9F9882225540C05009DAE79 /* SipHash */,
 				838DB607244EB3F4003AA66E /* secp256k1 */,
 				838DB60F244EB3F4003AA66E /* openssl */,
@@ -977,6 +975,7 @@
 			);
 			name = ConfluxSDK;
 			packageProductDependencies = (
+				E9DA1C6E258A349A006B50B3 /* CryptoSwift */,
 			);
 			productName = ConfluxSDK;
 			productReference = 833EE28723FBC7E900CAD85C /* ConfluxSDK.framework */;
@@ -1029,6 +1028,7 @@
 			);
 			mainGroup = 833EE27D23FBC7E900CAD85C;
 			packageReferences = (
+				E9DA1C6D258A349A006B50B3 /* XCRemoteSwiftPackageReference "CryptoSwift" */,
 			);
 			productRefGroup = 833EE28823FBC7E900CAD85C /* Products */;
 			projectDirPath = "";
@@ -1490,6 +1490,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E9DA1C6D258A349A006B50B3 /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.8;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E9DA1C6E258A349A006B50B3 /* CryptoSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E9DA1C6D258A349A006B50B3 /* XCRemoteSwiftPackageReference "CryptoSwift" */;
+			productName = CryptoSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 833EE27E23FBC7E900CAD85C /* Project object */;
 }

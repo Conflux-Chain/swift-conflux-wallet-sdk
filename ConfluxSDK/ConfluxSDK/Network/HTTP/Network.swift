@@ -82,7 +82,7 @@ public enum Network {
         case .mainnet:
             return 1029
         case .testnet:
-            return 0
+            return 1
         case .private(let chainID, _):
             return chainID
         }
