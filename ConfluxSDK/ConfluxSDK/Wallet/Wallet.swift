@@ -433,7 +433,7 @@ extension Wallet {
                     switch result {
                     case .success(let res):
                         let storageLimit = res.storageCollateralized
-                        let gasLimit = res.gasLimit.toInt()!
+                        let gasLimit = res.gasLimit.asInt()!
                         storageSelf.getGcfx().getEpochNumber { (result) in
                             switch result {
                             case .success(let epochHeight):
