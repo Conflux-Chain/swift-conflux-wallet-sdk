@@ -49,7 +49,7 @@ public extension ConfluxToken {
                           rootHash: String,
                           msg: String)
         
-        case rob(redPacketID: Int, location: Int, proof: String)
+        case rob(redPacketID: Int, location: Int, proof: [Data])
         
         var tokenFunction: Function {
             switch self {
@@ -104,7 +104,7 @@ public extension ConfluxToken {
                 try! encoder.encode(function: tokenFunction, arguments: [BigUInt(mode), BigUInt(groupId), BigUInt(number), BigUInt(whiteCount), Data(hexString: rootHash)!, msg])
                 
             case .rob(let id, let location, let proof):
-                try! encoder.encode(function: tokenFunction, arguments: [BigUInt(id), BigUInt(location), Data(hexString: proof)!])
+                try! encoder.encode(function: tokenFunction, arguments: [BigUInt(id), BigUInt(location), proof])
             }
             return encoder.data
             

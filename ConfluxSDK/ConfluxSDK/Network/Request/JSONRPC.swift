@@ -197,15 +197,15 @@ public final class JSONRPC {
             txParams["to"] = to
             
             if let gas = gasLimit {
-                txParams["gas"] = gas
+                txParams["gas"] = gas.hexStringWithPrefix
             }
             
             if let gasPrice = gasPrice {
-                txParams["gasPrice"] = gasPrice
+                txParams["gasPrice"] = gasPrice.hexStringWithPrefix
             }
             
             if let value = value {
-                txParams["value"] = value
+                txParams["value"] = value.hexStringWithPrefix
             }
             
             if let data = data {
@@ -247,4 +247,28 @@ public final class JSONRPC {
             return code
         }
     }
+    
+    public struct GetTransactionReceiptByHash: JSONRPCRequest {
+        public typealias Response = Dictionary<String, Any>
+        
+        public let transactionHash: String
+        
+        public var method: String {
+            return "cfx_getTransactionReceipt"
+        }
+        
+        public var parameters: Any? {
+            return [transactionHash]
+        }
+        
+        public func response(from resultObject: Any) throws -> Response {
+            guard let response = resultObject as? Dictionary<String, Any>
+            else{
+                throw JSONRPCError.unexpectedTypeObject(resultObject)
+            }
+                        
+            return response
+        }
+    }
+    
 }
