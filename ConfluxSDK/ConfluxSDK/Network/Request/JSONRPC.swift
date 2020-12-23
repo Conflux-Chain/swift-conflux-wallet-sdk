@@ -111,11 +111,11 @@ public final class JSONRPC {
         
         public let from: String?
         public let to: String?
-        public let gasLimit: String?
-        public let gasPrice: String?
-        public let nonce: String?
-        public let value: String?
-        public let data: String?
+        public let gasLimit: Int?
+        public let gasPrice: Int?
+        public let nonce: Int?
+        public let value: Drip?
+        public let data: Data?
         
         public var method: String {
             return "cfx_estimateGasAndCollateral"
@@ -133,22 +133,22 @@ public final class JSONRPC {
             }
             
             if let gas = gasLimit {
-                txParams["gas"] = gas
+                txParams["gas"] = gas.hexStringWithPrefix
             }
             
             if let gasPrice = gasPrice {
-                txParams["gasPrice"] = gasPrice
+                txParams["gasPrice"] = gasPrice.hexStringWithPrefix
             }
             if let nonce = nonce {
-                txParams["nonce"] = nonce
+                txParams["nonce"] = nonce.hexStringWithPrefix
             }
             
             if let value = value {
-                txParams["value"] = value
+                txParams["value"] = value.hexStringWithPrefix
             }
             
             if let data = data {
-                txParams["data"] = data
+                txParams["data"] = data.hexStringWithPrefix
             }
             return [txParams]
         }

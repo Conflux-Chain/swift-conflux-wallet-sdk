@@ -281,9 +281,9 @@ extension Wallet {
             guard let storageSelf = self else { return }
             switch result {
             case .success(let nonce):
-                let hexSendValue = (try? Converter.toDrip(cfx: sendValue).hexStringWithPrefix) ?? "0x0"
+                let sendValue = (try? Converter.toDrip(cfx: sendValue)) ?? Drip(0)
                 // let hexFullGasPrice = Converter.toDrip(Gdrip: gasPrice)
-                storageSelf.getGcfx().getEstimateGas(from: cfxWellet.address(), to: toAddress, gasPrice: gasPrice.hexStringWithPrefix, value: hexSendValue, nonce: nonce.hexStringWithPrefix) { (result) in
+                storageSelf.getGcfx().getEstimateGas(from: cfxWellet.address(), to: toAddress, gasPrice: gasPrice, value: sendValue, nonce: nonce) { (result) in
                     switch result {
                     case .success(let res):
                         // let gasUsed = res.gasUsed
@@ -347,10 +347,9 @@ extension Wallet {
             guard let storageSelf = self else { return }
             switch result {
             case .success(let nonce):
-                let formatSendValue = try! Converter.toDrip(cfx: sendValue).hexStringWithPrefix
-                let formatGasPrice = gasPrice.hexStringWithPrefix
-                let hexNonce = nonce.hexStringWithPrefix
-                storageSelf.getGcfx().getEstimateGas(from: fromAddress, to: toAddress, gasPrice: formatGasPrice, value: formatSendValue, nonce: hexNonce) { (result) in
+                let formatSendValue = try! Converter.toDrip(cfx: sendValue)
+                let formatGasPrice = gasPrice
+                storageSelf.getGcfx().getEstimateGas(from: fromAddress, to: toAddress, gasPrice: formatGasPrice, value: formatSendValue, nonce: nonce) { (result) in
                     switch result {
                     case .success(let resultTruple):
                         let gasUsed = resultTruple.gasUsed
@@ -429,7 +428,7 @@ extension Wallet {
             guard let storageSelf = self else { return }
             switch result {
             case .success(let nonce):
-                storageSelf.getGcfx().getEstimateGas(from: cfxWellet.address(), to: contractAddress, gasPrice: gasPrice.hexStringWithPrefix, value: "0x0", data: "0x" + data.hexString, nonce: nonce.hexStringWithPrefix) { (result) in
+                storageSelf.getGcfx().getEstimateGas(from: cfxWellet.address(), to: contractAddress, gasPrice: gasPrice, value: Drip(0), data: data, nonce: nonce) { (result) in
                     switch result {
                     case .success(let res):
                         let storageLimit = res.storageCollateralized

@@ -46,6 +46,9 @@ extension Data {
     public var hexString: String {
         return map({ String(format: "%02x", $0) }).joined()
     }
+    public var hexStringWithPrefix: String {
+        return "0x\(hexString)"
+    }
     
     static func randomBytes(count: Int) -> Data {
         var bytes = [UInt8](repeating: 0, count: count)
