@@ -428,7 +428,7 @@ extension Wallet {
             guard let storageSelf = self else { return }
             switch result {
             case .success(let nonce):
-                storageSelf.getGcfx().getEstimateGas(from: cfxWellet.address(), to: contractAddress, gasPrice: gasPrice, value: Drip(0), data: data, nonce: nonce) { (result) in
+                storageSelf.getGcfx().getEstimateGas(from: cfxWellet.address(), to: contractAddress, gasPrice: gasPrice, value: 0, data: data, nonce: nonce) { (result) in
                     switch result {
                     case .success(let res):
                         let storageLimit = res.storageCollateralized
@@ -437,7 +437,7 @@ extension Wallet {
                             switch result {
                             case .success(let epochHeight):
                                 let chainId = storageSelf.getGcfx().chainId
-                                let rawTransaction = ConfluxSDK.RawTransaction.init(drip: "0", to: contractAddress, gasPrice: gasPrice, gasLimit: gasLimit, nonce: nonce, data: data, storageLimit: storageLimit, epochHeight: Drip(epochHeight), chainId: chainId)
+                                let rawTransaction = ConfluxSDK.RawTransaction.init(value: 0, to: contractAddress, gasPrice: gasPrice, gasLimit: gasLimit, nonce: nonce, data: data, storageLimit: storageLimit, epochHeight: Drip(epochHeight), chainId: chainId)
                                 guard let transactionHash = try? cfxWellet.sign(rawTransaction: rawTransaction) else {
                                     completion(false, nil, "sign transaction failure")
                                     return
