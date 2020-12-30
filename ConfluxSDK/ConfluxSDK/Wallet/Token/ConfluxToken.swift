@@ -33,6 +33,8 @@ public extension ConfluxToken {
         case balanceOf(address: String)
         case transfer(address: String, amount: BInt)
         case decimals
+        case name
+        case symbol
         case redpacket(redpacketAddress: String,
                        groupId: Int,
                        amount: BInt,
@@ -65,6 +67,10 @@ public extension ConfluxToken {
                 return Function(name: "create", parameters: [.uint(bits: 8), .uint(bits: 256), .uint(bits: 256), .uint(bits: 256), .bytes(32), .string])
             case .rob:
                 return Function(name: "rob", parameters: [.uint(bits: 256), .uint(bits: 256), .dynamicArray(.bytes(32))])
+            case .name:
+                return Function(name: "name", parameters: [])
+            case .symbol:
+                return Function(name: "symbol", parameters: [])
             }
         }
 
@@ -78,7 +84,7 @@ public extension ConfluxToken {
             case .transfer(let toAddress, let poweredAmount):
                 try! encoder.encode(function: tokenFunction, arguments: [ConfluxAddress(string: toAddress)!, BigUInt(poweredAmount)])
 
-            case .decimals:
+            case .decimals, .name, .symbol:
                 try! encoder.encode(function: tokenFunction, arguments: [])
 
             case .redpacket(let redpacketAddress, let groupId, let poweredAmount, let mode,
@@ -96,7 +102,7 @@ public extension ConfluxToken {
                 ])
 
                 try! encoder.encode(function: tokenFunction, arguments: [ConfluxAddress(string: redpacketAddress)!, BigUInt(poweredAmount), encoder1.data])
-                //这里encode会丢失data的数据，我们单独拼接一下，由于有padding，去掉padding即可
+                // 这里encode会丢失data的数据，我们单独拼接一下，由于有padding，去掉padding即可
                 return encoder.data + encoder1.data.dropFirst(32)
                                 
             case .redpacketCFX(let mode, let groupId, let number, let whiteCount, let rootHash, let msg):
@@ -107,7 +113,6 @@ public extension ConfluxToken {
                 try! encoder.encode(function: tokenFunction, arguments: [BigUInt(id), BigUInt(location), proof])
             }
             return encoder.data
-            
         }
     }
 }
