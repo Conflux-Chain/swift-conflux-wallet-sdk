@@ -16,7 +16,7 @@ public final class JSONRPC {
         }
         
         public func response(from resultObject: Any) throws -> Drip {
-            guard let response = resultObject as? String, let drip = Drip(response.lowercased().cfxStripHexPrefix(), radix: 16) else {
+            guard let response = resultObject as? String, let drip = Drip(dripHexStr: response) else {
                 throw JSONRPCError.unexpectedTypeObject(resultObject)
             }
             return drip
@@ -55,7 +55,7 @@ public final class JSONRPC {
         }
         
         public func response(from resultObject: Any) throws -> Balance {
-            guard let response = resultObject as? String, let drip = Drip(response.lowercased().cfxStripHexPrefix(), radix: 16) else {
+            guard let response = resultObject as? String, let drip = Drip(dripHexStr: response) else {
                 throw JSONRPCError.unexpectedTypeObject(resultObject)
             }
             return Balance(drip: drip)
@@ -162,8 +162,8 @@ public final class JSONRPC {
                 throw JSONRPCError.unexpectedTypeObject(resultObject)
             }
             
-            guard let gasUsed = Drip(gasUsedStr.lowercased().cfxStripHexPrefix(), radix: 16) , let storageCollateralized = Drip(storageCollateralizedStr.lowercased().cfxStripHexPrefix(), radix: 16),
-                  let gasLimit = Drip(gasLimitStr.lowercased().cfxStripHexPrefix(), radix: 16)
+            guard let gasUsed = Drip(dripHexStr: gasUsedStr) , let storageCollateralized = Drip(dripHexStr: storageCollateralizedStr),
+                  let gasLimit = Drip(dripHexStr: gasLimitStr)
             else {
                 throw JSONRPCError.unexpectedTypeObject(resultObject)
             }

@@ -363,25 +363,25 @@ public struct BInt:
     /// system of the specified radix (base). You have to specify the base as a prefix, so for
     /// example, "0b100101010101110" is a vaild input for a binary number. Currently,
     /// hexadecimal (0x), octal (0o) and binary (0b) are supported.
-    public init?(prefixedNumber number: String)
-    {
-        if number.hasPrefix("0x")
-        {
-            self.init(String(number.dropFirst(2)), radix: 16)
-        }
-        if number.hasPrefix("0o")
-        {
-            self.init(String(number.dropFirst(2)), radix: 8)
-        }
-        if number.hasPrefix("0b")
-        {
-            self.init(String(number.dropFirst(2)), radix: 2)
-        }
-        else
-        {
-            return nil
-        }
-    }
+//    public init?(prefixedNumber number: String)
+//    {
+//        if number.hasPrefix("0x")
+//        {
+//            self.init(String(number.dropFirst(2)), radix: 16)
+//        }
+//        if number.hasPrefix("0o")
+//        {
+//            self.init(String(number.dropFirst(2)), radix: 8)
+//        }
+//        if number.hasPrefix("0b")
+//        {
+//            self.init(String(number.dropFirst(2)), radix: 2)
+//        }
+//        else
+//        {
+//            return nil
+//        }
+//    }
 
     //    Requierd by protocol ExpressibleByFloatLiteral.
     public init(floatLiteral value: Double)

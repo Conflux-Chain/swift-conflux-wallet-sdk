@@ -180,6 +180,7 @@
 		83A4692424091F1C00C3A347 /* BigIntEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A4692324091F1C00C3A347 /* BigIntEncoding.swift */; };
 		83A4692624091FF200C3A347 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A4692524091FF200C3A347 /* Data+Extension.swift */; };
 		83A46928240921C400C3A347 /* ConfluxChecksum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A46927240921C400C3A347 /* ConfluxChecksum.swift */; };
+		E97F016F259C6685003DAC90 /* Drip+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97F016E259C6685003DAC90 /* Drip+Extension.swift */; };
 		E9DA1C6F258A349A006B50B3 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E9DA1C6E258A349A006B50B3 /* CryptoSwift */; };
 		E9DC6C3A25932804009D85D5 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DC6C3925932804009D85D5 /* Int+Extension.swift */; };
 		E9DC6C3D259329B7009D85D5 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DC6C3C259329B7009D85D5 /* Double+Extension.swift */; };
@@ -391,6 +392,7 @@
 		83A4692324091F1C00C3A347 /* BigIntEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigIntEncoding.swift; sourceTree = "<group>"; };
 		83A4692524091FF200C3A347 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		83A46927240921C400C3A347 /* ConfluxChecksum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfluxChecksum.swift; sourceTree = "<group>"; };
+		E97F016E259C6685003DAC90 /* Drip+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Drip+Extension.swift"; sourceTree = "<group>"; };
 		E9DC6C3925932804009D85D5 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		E9DC6C3C259329B7009D85D5 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		E9F9882325540C1C009DAE79 /* Primitive Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Primitive Types.swift"; sourceTree = "<group>"; };
@@ -612,6 +614,7 @@
 				833EE38F23FD3A0C00CAD85C /* SMP+Extension.swift */,
 				E9DC6C3925932804009D85D5 /* Int+Extension.swift */,
 				E9DC6C3C259329B7009D85D5 /* Double+Extension.swift */,
+				E97F016E259C6685003DAC90 /* Drip+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1117,6 +1120,7 @@
 				83A4691324091C6100C3A347 /* Codable.swift in Sources */,
 				E9F9882825540C1C009DAE79 /* SipHashable.swift in Sources */,
 				83A4692424091F1C00C3A347 /* BigIntEncoding.swift in Sources */,
+				E97F016F259C6685003DAC90 /* Drip+Extension.swift in Sources */,
 				83A4691024091C6100C3A347 /* Square Root.swift in Sources */,
 				8375C19423FE5F69003D5A31 /* HDPrivateKey.swift in Sources */,
 				E9F9882A25540C1C009DAE79 /* SipHasher.swift in Sources */,
