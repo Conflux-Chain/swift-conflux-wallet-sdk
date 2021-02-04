@@ -180,6 +180,7 @@
 		83A4692424091F1C00C3A347 /* BigIntEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A4692324091F1C00C3A347 /* BigIntEncoding.swift */; };
 		83A4692624091FF200C3A347 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A4692524091FF200C3A347 /* Data+Extension.swift */; };
 		83A46928240921C400C3A347 /* ConfluxChecksum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A46927240921C400C3A347 /* ConfluxChecksum.swift */; };
+		E9605A4225CC1486004EACA3 /* CIP37.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9605A4125CC1486004EACA3 /* CIP37.swift */; };
 		E97F016F259C6685003DAC90 /* Drip+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97F016E259C6685003DAC90 /* Drip+Extension.swift */; };
 		E9DA1C6F258A349A006B50B3 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E9DA1C6E258A349A006B50B3 /* CryptoSwift */; };
 		E9DC6C3A25932804009D85D5 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DC6C3925932804009D85D5 /* Int+Extension.swift */; };
@@ -392,6 +393,7 @@
 		83A4692324091F1C00C3A347 /* BigIntEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigIntEncoding.swift; sourceTree = "<group>"; };
 		83A4692524091FF200C3A347 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		83A46927240921C400C3A347 /* ConfluxChecksum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfluxChecksum.swift; sourceTree = "<group>"; };
+		E9605A4125CC1486004EACA3 /* CIP37.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIP37.swift; sourceTree = "<group>"; };
 		E97F016E259C6685003DAC90 /* Drip+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Drip+Extension.swift"; sourceTree = "<group>"; };
 		E9DC6C3925932804009D85D5 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		E9DC6C3C259329B7009D85D5 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
@@ -603,6 +605,7 @@
 				8375C19923FE68B8003D5A31 /* EIP155Signer.swift */,
 				839AA39923FFC4F40066B6CF /* BinaryDecoding.swift */,
 				83A4692524091FF200C3A347 /* Data+Extension.swift */,
+				E9605A4125CC1486004EACA3 /* CIP37.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1096,6 +1099,7 @@
 				833EE36623FBE74000CAD85C /* Cancellable.swift in Sources */,
 				83A4692624091FF200C3A347 /* Data+Extension.swift in Sources */,
 				83A4690D24091C6100C3A347 /* Bitwise Ops.swift in Sources */,
+				E9605A4225CC1486004EACA3 /* CIP37.swift in Sources */,
 				E9DC6C3A25932804009D85D5 /* Int+Extension.swift in Sources */,
 				833EE3A123FE25B200CAD85C /* Crypto.swift in Sources */,
 				833EE37E23FCE54000CAD85C /* Configuration.swift in Sources */,

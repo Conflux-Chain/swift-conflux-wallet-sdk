@@ -24,15 +24,17 @@ public protocol SuperAddress: CustomStringConvertible {
 }
 
 public struct ConfluxAddress: SuperAddress, Hashable {
+    private(set) var newVersion = false // CIP37
+    
     public static let size = 20
 
     /// Validates that the raw data is a valid address.
-    static public func isValid(data: Data) -> Bool {
+    public static func isValid(data: Data) -> Bool {
         return data.count == ConfluxAddress.size
     }
 
     /// Validates that the string is a valid address.
-    static public func isValid(string: String) -> Bool {
+    public static func isValid(string: String) -> Bool {
         guard let data = Data(hexString: string) else {
             return false
         }
@@ -44,6 +46,11 @@ public struct ConfluxAddress: SuperAddress, Hashable {
 
     /// EIP55 representation of the address.
     public let eip55String: String
+    
+    /// CIP37 representation of the address.
+    public func cip37String(prefix:String) -> String {
+        return data.base32StringWithChecksum(prefix: prefix)
+    }
 
     /// Creates an address with `Data`.
     ///
@@ -58,6 +65,11 @@ public struct ConfluxAddress: SuperAddress, Hashable {
 
     /// Creates an address with an hexadecimal string representation.
     public init?(string: String) {
+        if let d = Data(confluxBase32Address: string) {
+            self.init(data: d)
+            return
+        }
+        
         guard let data = Data(hexString: string), ConfluxAddress.isValid(data: data) else {
             return nil
         }
@@ -68,8 +80,8 @@ public struct ConfluxAddress: SuperAddress, Hashable {
         return eip55String
     }
 
-    public var hashValue: Int {
-        return data.hashValue
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(data)
     }
 
     public static func == (lhs: ConfluxAddress, rhs: ConfluxAddress) -> Bool {
