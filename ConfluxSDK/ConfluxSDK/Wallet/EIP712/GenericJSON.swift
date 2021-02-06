@@ -7,17 +7,17 @@ import Foundation
 /// for JSON values, since it makes sure only valid JSON values are present & supports `Equatable`
 /// and `Codable`, so that you can compare values for equality and code and decode them into data
 /// or strings.
-public enum JSON: Equatable {
+public enum ConfluxJSON: Equatable {
     case string(String)
 //    case number(Float)
     case numberD(Double)
-    case object([String: JSON])
-    case array([JSON])
+    case object([String: ConfluxJSON])
+    case array([ConfluxJSON])
     case bool(Bool)
     case null
 }
 
-extension JSON: Codable {
+extension ConfluxJSON: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
@@ -40,9 +40,9 @@ extension JSON: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let object = try? container.decode([String: JSON].self) {
+        if let object = try? container.decode([String: ConfluxJSON].self) {
             self = .object(object)
-        } else if let array = try? container.decode([JSON].self) {
+        } else if let array = try? container.decode([ConfluxJSON].self) {
             self = .array(array)
         } else if let string = try? container.decode(String.self) {
             self = .string(string)
@@ -65,7 +65,7 @@ extension JSON: Codable {
     }
 }
 
-extension JSON: CustomDebugStringConvertible {
+extension ConfluxJSON: CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
         case .string(let str):
@@ -86,7 +86,7 @@ extension JSON: CustomDebugStringConvertible {
     }
 }
 
-public extension JSON {
+public extension ConfluxJSON {
     /// Return the string value if this is a `.string`, otherwise `nil`
     var stringValue: String? {
         if case .string(let value) = self {
@@ -120,7 +120,7 @@ public extension JSON {
     }
 
     /// Return the object value if this is an `.object`, otherwise `nil`
-    var objectValue: [String: JSON]? {
+    var objectValue: [String: ConfluxJSON]? {
         if case .object(let value) = self {
             return value
         }
@@ -128,7 +128,7 @@ public extension JSON {
     }
 
     /// Return the array value if this is an `.array`, otherwise `nil`
-    var arrayValue: [JSON]? {
+    var arrayValue: [ConfluxJSON]? {
         if case .array(let value) = self {
             return value
         }
@@ -146,7 +146,7 @@ public extension JSON {
     /// If this is an `.array`, return item at index
     ///
     /// If this is not an `.array` or the index is out of bounds, returns `nil`.
-    subscript(index: Int) -> JSON? {
+    subscript(index: Int) -> ConfluxJSON? {
         if case .array(let arr) = self, arr.indices.contains(index) {
             return arr[index]
         }
@@ -154,7 +154,7 @@ public extension JSON {
     }
 
     /// If this is an `.object`, return item at key
-    subscript(key: String) -> JSON? {
+    subscript(key: String) -> ConfluxJSON? {
         if case .object(let dict) = self {
             return dict[key]
         }
