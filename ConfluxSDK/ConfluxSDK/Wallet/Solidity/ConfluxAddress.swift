@@ -49,7 +49,7 @@ public struct ConfluxAddress: SuperAddress, Hashable {
     
     /// CIP37 representation of the address.
     public func cip37String(prefix:String) -> String {
-        return data.base32StringWithChecksum(prefix: prefix)
+        return data.cip37AddressWith(prefix: prefix)
     }
 
     /// Creates an address with `Data`.

@@ -42,7 +42,7 @@ public final class Keystore: Decodable {
             password: password)
         let key = PrivateKey(raw: privateKey)
         let publicKey = key.publicKey
-        address = publicKey.address()
+        address = publicKey.address(prefix: "cfx")
         let uuid = UUID()
         identifier = uuid.uuidString.lowercased()
         version = 3

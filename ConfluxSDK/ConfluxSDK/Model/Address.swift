@@ -16,13 +16,15 @@ public struct Address {
         self.string = string
     }
     
-    public init(data: Data) {
+    public init(data: Data, isTestNet:Bool) {
         self.data = data
-        self.string = "0x" + EIP55.encode(data)
+        let prefix = isTestNet ? "cfxtest" : "cfx"
+        self.string = data.cip37AddressWith(prefix: prefix)
     }
     
     public init(string: String) {
-        self.data = Data(hex: string.cfxStripHexPrefix())
+        let addr = ConfluxAddress(string: string)
+        self.data = addr?.data ?? Data()
         self.string = string
     }
 }

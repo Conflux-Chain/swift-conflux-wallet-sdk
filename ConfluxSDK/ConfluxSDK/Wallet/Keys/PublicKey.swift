@@ -28,8 +28,8 @@ public class PublicKey: NSObject {
     /// generates address from its public key
     ///
     /// - Returns: address in string format
-    public func address() -> String {
-        return Address(data: addressData).string
+    public func address(prefix:String) -> String {
+        return ConfluxAddress(data: addressData)!.cip37String(prefix: prefix)
     }
     
     /// Address data generated from public key in data format

@@ -33,7 +33,7 @@ extension EIP712TypedData {
 
     /// Sign-able hash for an `EIP712TypedData`
     public var signHash: Data {
-        let data = Data(bytes: [0x19, 0x01]) +
+        let data = Data([0x19, 0x01]) +
             encodeData(data: domain, type: "EIP712Domain").sha3(.keccak256) +
             encodeData(data: message, type: primaryType).sha3(.keccak256)
         return data// .sha3(.keccak256)

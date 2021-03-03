@@ -75,7 +75,8 @@ extension Wallet {
     ///
     /// - Returns: Address in string format
     public func address() -> String {
-        return key.publicKey.address()
+        let prefix = network == .mainnet ? "cfx" : "cfxtest"
+        return key.publicKey.address(prefix: prefix)
     }
     
     /// Reveal private key of this wallet in data format

@@ -169,7 +169,7 @@ extension Data {
         for i in testData {
             let address = i.0.0
             let prefix = i.0.1
-            let r = prefix + ":" + Data(hexString: address)!.base32StringWithChecksum(prefix: prefix)
+            let r = Data(hexString: address)!.cip37AddressWith(prefix: prefix)
 
             let t = i.1.split(separator: ":")
             let target = "\(t[0]):\(t.last!)"
@@ -218,6 +218,10 @@ extension Data {
         }
 
         self = bitsToBytes(bits: Array(payload[8..<payload.count - 2]))
+    }
+
+    func cip37AddressWith(prefix: String) -> String {
+        "\(prefix):\(base32StringWithChecksum(prefix: prefix))"
     }
 
     func base32StringWithChecksum(prefix: String) -> String {
