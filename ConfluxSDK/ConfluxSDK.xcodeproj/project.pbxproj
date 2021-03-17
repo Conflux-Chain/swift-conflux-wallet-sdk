@@ -1368,6 +1368,7 @@
 					"$(PROJECT_DIR)/Libraries/secp256k1/lib",
 					"$(PROJECT_DIR)/Libraries/openssl/lib",
 				);
+				MARKETING_VERSION = 2.0;
 				MODULEMAP_FILE = ConfluxSDK/SupportingFiles/ConfluxSDK.modulemap;
 				ON_DEMAND_RESOURCES_PREFETCH_ORDER = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.blockchain.dappbirds.ConfluxSDK;
@@ -1424,6 +1425,7 @@
 					"$(PROJECT_DIR)/Libraries/secp256k1/lib",
 					"$(PROJECT_DIR)/Libraries/openssl/lib",
 				);
+				MARKETING_VERSION = 2.0;
 				MODULEMAP_FILE = ConfluxSDK/SupportingFiles/ConfluxSDK.modulemap;
 				ON_DEMAND_RESOURCES_PREFETCH_ORDER = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.blockchain.dappbirds.ConfluxSDK;
