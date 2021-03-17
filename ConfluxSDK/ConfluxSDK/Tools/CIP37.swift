@@ -189,19 +189,23 @@ extension Data {
         flatMap { bits(fromByte: $0) }
     }
 
-    init(base32: String) {
+    init?(base32: String) {
         self.init()
         for char in base32 {
-            append(base32TableReverse[char]!)
+            guard let c = base32TableReverse[char] else {return nil}
+            append(c)
         }
     }
 
     init?(confluxBase32Address: String) {
         let l = confluxBase32Address.lowercased().split(separator: ":")
-        guard l.count >= 2, let prefix = l.first, let address = l.last
+        guard l.count >= 2,
+              let prefix = l.first,
+              let address = l.last,
+              var payload = Data(base32: String(address))
         else { return nil }
         self.init()
-        var payload = Data(base32: String(address))
+        
         var ckData: Data = String(prefix).confluxBase32Data + [0]
         ckData.append(contentsOf: payload)
         guard ckData.polyMod == "aaaaaaaa" else { return nil }

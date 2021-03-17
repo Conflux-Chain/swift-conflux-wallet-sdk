@@ -69,11 +69,11 @@ public struct ConfluxAddress: SuperAddress, Hashable {
             self.init(data: d)
             return
         }
-        
-        guard let data = Data(hexString: string), ConfluxAddress.isValid(data: data) else {
-            return nil
-        }
-        self.init(data: data)
+        return nil
+//        guard let data = Data(hexString: string), ConfluxAddress.isValid(data: data) else {
+//            return nil
+//        }
+//        self.init(data: data)
     }
 
     public var description: String {
