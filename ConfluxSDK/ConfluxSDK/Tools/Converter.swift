@@ -19,6 +19,13 @@ public extension Drip {
     // NOTE: calculate drip by 10^18
     private static let confluxInDrip = pow(Decimal(10), 18)
     
+    
+    public static func convert(oldAddress:String) ->ConfluxAddress? {
+        guard let data = Data(hexString: oldAddress), ConfluxAddress.isValid(data: data) else {
+            return nil
+        }
+        return ConfluxAddress(data: data)
+    }
     /// Convert Drip(BInt) unit to Conflux(Decimal) unit
     public static func toConflux(drip: Drip) throws -> Conflux {
         guard let decimalDrip = Decimal(string: drip.description) else {
