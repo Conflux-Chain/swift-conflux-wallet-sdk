@@ -9,10 +9,23 @@
 public typealias Conflux = Decimal
 public typealias Drip = BInt
 
+public extension Drip {
+    init?(dripHexStr n:String) {
+        self.init(n.lowercased().cfxStripHexPrefix(), radix: 16)
+    }
+}
+
 @objc public final class Converter : NSObject {
     // NOTE: calculate drip by 10^18
     private static let confluxInDrip = pow(Decimal(10), 18)
     
+    
+    public static func convert(oldAddress:String) ->ConfluxAddress? {
+        guard let data = Data(hexString: oldAddress), ConfluxAddress.isValid(data: data) else {
+            return nil
+        }
+        return ConfluxAddress(data: data)
+    }
     /// Convert Drip(BInt) unit to Conflux(Decimal) unit
     public static func toConflux(drip: Drip) throws -> Conflux {
         guard let decimalDrip = Decimal(string: drip.description) else {
@@ -56,7 +69,7 @@ public typealias Drip = BInt
     
     
     @objc public static func hexDripToCfx(hexDrip: String, decimal: Int = 18) throws -> String {
-        guard let drip = BInt(hexDrip, radix: 16) else {
+        guard let drip = BInt(hexDrip) else {
             throw ConfluxError.convertError(.failedToConvert(hexDrip))
         }
         guard let result = try? self.dripToStrWithDecimal(drip: drip, decimal: decimal) else {

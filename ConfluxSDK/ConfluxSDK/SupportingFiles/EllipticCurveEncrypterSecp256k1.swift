@@ -1,5 +1,4 @@
 import secp256k1
-import CryptoSwift
 
 /// Convenience class over libsecp256k1 methods
 public final class EllipticCurveEncrypterSecp256k1 {

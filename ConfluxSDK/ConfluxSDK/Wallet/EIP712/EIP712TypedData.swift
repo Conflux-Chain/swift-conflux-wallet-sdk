@@ -20,8 +20,8 @@ public struct EIP712Domain: Codable {
 public struct EIP712TypedData: Codable {
     public let types: [String: [EIP712Type]]
     public let primaryType: String
-    public let domain: JSON
-    public let message: JSON
+    public let domain: ConfluxJSON
+    public let message: ConfluxJSON
 }
 
 extension EIP712TypedData {
@@ -33,7 +33,7 @@ extension EIP712TypedData {
 
     /// Sign-able hash for an `EIP712TypedData`
     public var signHash: Data {
-        let data = Data(bytes: [0x19, 0x01]) +
+        let data = Data([0x19, 0x01]) +
             encodeData(data: domain, type: "EIP712Domain").sha3(.keccak256) +
             encodeData(data: message, type: primaryType).sha3(.keccak256)
         return data// .sha3(.keccak256)
@@ -69,7 +69,7 @@ extension EIP712TypedData {
     /// Encode an instance of struct
     ///
     /// Implemented with `ABIEncoder` and `ABIValue`
-    public func encodeData(data: JSON, type: String) -> Data {
+    public func encodeData(data: ConfluxJSON, type: String) -> Data {
         let encoder = ABIEncoder()
         var values: [ABIValue] = []
         do {
@@ -102,7 +102,7 @@ extension EIP712TypedData {
     }
 
     /// Helper func for `encodeData`
-    private func makeABIValue(data: JSON?, type: String) -> ABIValue? {
+    private func makeABIValue(data: ConfluxJSON?, type: String) -> ABIValue? {
         if (type == "string" || type == "bytes"),
             let value = data?.stringValue,
             let valueData = value.data(using: .utf8) {

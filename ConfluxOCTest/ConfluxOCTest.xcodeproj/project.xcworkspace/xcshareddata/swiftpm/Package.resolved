@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SipHash",
+        "repositoryURL": "https://github.com/attaswift/SipHash.git",
+        "state": {
+          "branch": null,
+          "revision": "e325083424688055363bbfcb7f1a440d7d7a1bae",
+          "version": "1.2.2"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

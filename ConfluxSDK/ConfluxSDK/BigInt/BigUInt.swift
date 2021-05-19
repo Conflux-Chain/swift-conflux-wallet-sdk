@@ -5,7 +5,6 @@
 //  Created by Károly Lőrentey on 2015-12-26.
 //  Copyright © 2016-2017 Károly Lőrentey.
 //
-
 /// An arbitary precision unsigned integer type, also known as a "big integer".
 ///
 /// Operations on big integers never overflow, but they may take a long time to execute.
@@ -29,7 +28,6 @@ public struct BigUInt: UnsignedInteger {
 
     internal fileprivate (set) var kind: Kind // Internal for testing only
     internal fileprivate (set) var storage: [Word] // Internal for testing only; stored separately to prevent COW copies
-
     /// Initializes a new BigUInt with value 0.
     public init() {
         self.kind = .inline(0, 0)
@@ -181,7 +179,6 @@ extension BigUInt {
 
 extension BigUInt {
     //MARK: Collection-like members
-
     /// The number of digits in this integer, excluding leading zero digits.
     var count: Int {
         switch kind {
@@ -349,7 +346,7 @@ extension BigUInt {
     /// Split this integer into a high-order and a low-order part.
     ///
     /// - Requires: count > 1
-    /// - Returns: `(low, high)` such that 
+    /// - Returns: `(low, high)` such that
     ///   - `self == low.add(high, shiftedBy: middleIndex)`
     ///   - `high.width <= floor(width / 2)`
     ///   - `low.width <= ceil(width / 2)`
@@ -383,4 +380,3 @@ extension BigUInt {
         return self.extract(middleIndex ..< count)
     }
 }
-

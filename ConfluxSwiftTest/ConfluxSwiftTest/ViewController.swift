@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     let FCContractAddress = "0x85b693011c05197f4acbb4246830be8fbd4e904f"
     let fcAddress = "0x1e01c8ED8006E11f942e16C9f5022dfCe2CDe121" // "0x1E9Df1b31c720C893C651de98caDCA6959015496"
     let fcPrivateKey = "52121b96e4129cc979b41f5105934e49b104b1da4f74793162478fec76e86df0" // "dd7e6331983d72b65d0e93849ec531b453a18a898d9e8bb397eba86e7f377036"
+    let o = ConfluxWalletManager(netName: "main", chainId: 1029, nodePoint: "http://test.confluxrpc.org", isDebug: false)
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -34,6 +35,8 @@ class ViewController: UIViewController {
         
         // 4. send Cfx
 //         self.sendCfxToAddress()
+        self.sendRedPacketToken()
+//        self.sendCFXRedpacket()
         
         // 5. get gasPrice
         // self.getGasPrice()
@@ -59,12 +62,145 @@ class ViewController: UIViewController {
         
         // 12. signPersonalMessage
         // self.signPersonalMessage(msg: "message")
+    func printError(e:ConfluxError) {
+        switch e {
+            case .responseError(let e):
+                switch e {
+                    case .unexpected(let e):
+                    
+                        switch e as! ConfluxError {
+                            case .responseError(let e):
+                                switch e {
+                                    case .jsonrpcError(let e):
+                                    switch e {
+                                        case .responseError(let code, let message, let data):
+                                            let s = data as? String ?? "nil"
+                                            if let d = Data(hexString: s) {
+                                                print(code, message, String(data: d, encoding: .utf8) ?? s)
+                                            } else {
+                                                print(code, message, s)
+                                            }
+                                            
+                                        default:break
+                                    }
+                                    default:break
+                                }
+                        default:
+                            break
+                    }
+                    default:
+                        break
+                }
+            
+            
+            default:
+                print(e)
+        }
+    }
+    func sendCFXRedpacket() {
+        guard let cfxWellet = self.importWallet() else {
+            print( "creat wallet failiure")
+            return
+        }
+        let sendValue = "8"
+        let fromAddress = cfxWellet.address()
+        guard let sendValueIntDrip = try? Converter.toDrip(cfx: sendValue) else {
+            print( "Converter toDrip failiure")
+            return
+        }
         
-        // 13. getEpochNumber
-        // self.getEpochNumber()
+        let data =  ConfluxToken.ContractFunctions.redpacketCFX(mode: 0, groupId: 123123123, number: 3, whiteCount: 10, rootHash: "0x"+"fdsdferewddesffedrdssddedrffdddd".data(using: .utf8)!.hexString, msg: "ddd").data
         
-        // 14.getPrivateKeyByKeystore
-        // self.getPrivateKeyByKeystore()
+        self.getGcfx().getNextNonce(of: cfxWellet.address()) { [weak self] (result) in
+            guard let storageSelf = self else { return }
+            switch result {
+            case .success(let nonce):
+                let hexSendValue = sendValueIntDrip.hexStringWithPrefix
+                storageSelf.getGcfx().getEstimateGas(from: fromAddress, to: storageSelf.redpacketAddress, gasPrice: 1, value: sendValueIntDrip, data:data, nonce: nonce ) { (result) in
+                    switch result {
+                    case .success(let res):
+                        let gasLimit = res.gasLimit * 1.3
+                        storageSelf.getGcfx().getEpochNumber { (result) in
+                            switch result {
+                            case .success(let epochHeight):
+                                
+                                let rawTransaction = RawTransaction( value: sendValueIntDrip, to: storageSelf.redpacketAddress, gasPrice: 1, gasLimit: Int(gasLimit), nonce: nonce, data: data, storageLimit: res.storageCollateralized, epochHeight: Drip(epochHeight), chainId: 1)
+                                    
+                                guard let transactionHash = try? cfxWellet.sign(rawTransaction: rawTransaction) else {
+                                    print(" sign transaction failure")
+                                    return
+                                }
+                                storageSelf.getGcfx().sendRawTransaction(rawTransaction: transactionHash) { (result) in
+                                    switch result {
+                                    case .success(let hash):
+                                        print( hash)
+                                    case .failure(let e):
+                                        storageSelf.printError(e: e)
+                                        print( " send transaction failure")
+                                    }
+                                }
+                                
+                            case .failure(let error):
+                                self!.printError(e: error)
+                            }
+                        }
+                        
+                    case .failure(let error):
+                        self!.printError(e: error)
+                    }
+                }
+            case .failure(_):
+                print( "GetNextNonce failure")
+            }
+        }
+    }
+    func sendRedPacketToken() {
+
+        let powCustome = pow(Decimal(10), 18)
+        guard let decimalConflux = Decimal(string: "20") else { return  }
+        let sendValue = Drip((decimalConflux * powCustome).description)!
+        let data = ConfluxToken.ContractFunctions.redpacket(redpacketAddress: self.redpacketAddress, groupId: 1000, amount: sendValue, mode: 0, number: 8, whiteCount: 10, rootHash:Data(hexString: "04afe54e292938c07fdf22bfadfc44bb8d9841f15e1babe8ba2b5c0d9a9f303e")!.hexString, msg: "恭喜发财").data
+
+        self.getGcfx().getNextNonce(of: walletAddress) { (r) in
+            switch r {
+                case .success(let n):
+                    self.getGcfx().getEstimateGas(from: self.walletAddress, to: self.FCContractAddress, gasPrice: 1, value: 0, data: data, nonce: n) { (r) in
+                        switch r {
+                            case .success( let res):
+                                let gasLimit = res.gasLimit * 1.3
+                                let storageLimit = res.storageCollateralized
+                                self.getGcfx().getEpochNumber { (result) in
+                                    switch result {
+                                    case .success(let epochHeight):
+                                        
+                                        let rawTransaction = ConfluxSDK.RawTransaction(value: 0, to: self.FCContractAddress, gasPrice: 1, gasLimit: Int(gasLimit), nonce: n, data: data, storageLimit: storageLimit, epochHeight: Drip(epochHeight), chainId: 1)
+                                        
+                                        guard let transactionHash = try? self.importWallet()!.sign(rawTransaction: rawTransaction) else {
+                                            print( " sign transaction failure")
+                                            return
+                                        }
+                                        self.getGcfx().sendRawTransaction(rawTransaction: transactionHash) { (result) in
+                                            switch result {
+                                            case .success(let hash):
+                                                print( hash)
+                                            case .failure(let e):
+                                                self.printError(e: e)
+                                            }
+                                        }
+                                        
+                                    case .failure(let error):
+                                        print( " getEpochNumber failure")
+                                    }
+                                }
+                            
+                            case .failure(let e):
+                                self.printError(e: e)
+                        }
+                    }
+                case .failure(let e):
+                    self.printError(e: e)
+            }
+        }
         
     }
     
@@ -92,10 +228,8 @@ class ViewController: UIViewController {
             case .success(let nonce):
                 print( nonce)
                 // let sendValue = try! Converter.toDrip(cfx: "1").hexStringWithPrefix // "0xde0b6b3a7640000"
-                let hexNonce = nonce.hexStringWithPrefix
-                print(gasPrice.hexStringWithPrefix)
-                print(data.hexString)
-                storageSelf.getGcfx().getEstimateGas(from: storageSelf.fcAddress, to: storageSelf.FCContractAddress, gasPrice: gasPrice.hexStringWithPrefix, value: "0x0", data: "0x" + data.hexString, nonce: hexNonce ) { (result) in
+
+                storageSelf.getGcfx().getEstimateGas(from: storageSelf.walletAddress, to: storageSelf.FCContractAddress, gasPrice: gasPrice, value: 0, data: data, nonce: nonce ) { (result) in
                     switch result {
                     case .success(let res):
                         let storageLimit = res.storageCollateralized
@@ -106,7 +240,7 @@ class ViewController: UIViewController {
                             switch result {
                             case .success(let epochHeight):
                                 print(epochHeight)
-                                let rawTransaction = ConfluxSDK.RawTransaction.init(drip: "0", to: storageSelf.FCContractAddress, gasPrice: gasPrice, gasLimit: gasLimit, nonce: nonce, data: data, storageLimit: storageLimit, epochHeight: Drip(epochHeight), chainId: 0)
+                                let rawTransaction = ConfluxSDK.RawTransaction.init(value: 0, to: storageSelf.FCContractAddress, gasPrice: gasPrice, gasLimit: gasLimit, nonce: nonce, data: data, storageLimit: storageLimit, epochHeight: Drip(epochHeight), chainId: 1)
                                 guard let transactionHash = try? FCWellet.sign(rawTransaction: rawTransaction) else {
                                     print( " sign transaction failure")
                                     return
@@ -138,7 +272,7 @@ class ViewController: UIViewController {
     
         
     func testCreatNewWallet() {
-        let mnemoStr = "finish oppose decorate face calm tragic certain desk hour urge dinosaur mango"
+        let mnemoStr = "express torch tank tragic identify casino talent tornado few pioneer congress child"
         let mnemonicArr = mnemoStr.split(separator: " ").map({ (substring) in
             return String(substring)
         })
@@ -150,8 +284,7 @@ class ViewController: UIViewController {
             return
         }
 
-        let network = Network.init(name: "private", chainID: 0, testUse: false)
-        guard let cfxWallet = try? Wallet.init(seed: seed, network: network ?? .testnet, printDebugLog: true) else {
+        guard let cfxWallet = try? Wallet.init(seed: seed, network: .mainnet, printDebugLog: true) else {
             print( "creat wallet failiure")
             return
         }
@@ -164,14 +297,16 @@ class ViewController: UIViewController {
             mnemonicStr += subString + " "
         }
         mnemonicStr = mnemonicStr.trimmingCharacters(in: NSCharacterSet.whitespaces)
-
+        
+        walletAddress = address
+        self.privateKeyStr = privateKeyStr
         print( privateKeyStr)
         print( mnemonicStr)
         print( address)
     }
     
     func importWallet() -> Wallet? {
-        let network = Network.init(name: "private", chainID: 0, testUse: false)
+        let network = Network.init(name: "main", chainID: 0, testUse: false)
         guard let cfxWellet = try? Wallet.init(network: network ?? .testnet, privateKey: self.privateKeyStr, printDebugLog: true) else {
             print( "creat wallet failiure")
             return nil
@@ -181,8 +316,7 @@ class ViewController: UIViewController {
     }
     
     func getGcfx() -> Gcfx {
-         let network = Network.init(name: "private", chainID: 0, testUse: false)
-        let configuration = ConfluxSDK.Configuration(network: network ?? .testnet, nodeEndpoint: "http://testnet-jsonrpc.conflux-chain.org:12537", debugPrints: true)
+        let configuration = ConfluxSDK.Configuration(network: .mainnet, nodeEndpoint: "http://test.confluxrpc.org", debugPrints: false)
         return Gcfx(configuration: configuration)
     }
     
@@ -223,8 +357,8 @@ class ViewController: UIViewController {
             switch result {
             case .success(let nonce):
                 print( nonce)
-                let hexSendValue = (try? Converter.toDrip(cfx: sendValue).hexStringWithPrefix) ?? "0x0"
-                storageSelf.getGcfx().getEstimateGas(from: fromAddress, to: storageSelf.toAddress, gasPrice: gasPrice.hexStringWithPrefix, value: hexSendValue, nonce: nonce.hexStringWithPrefix) { (result) in
+                let SendValue = (try? Converter.toDrip(cfx: sendValue)) ?? 0
+                storageSelf.getGcfx().getEstimateGas(from: fromAddress, to: storageSelf.toAddress, gasPrice: gasPrice, value: SendValue, nonce: nonce) { (result) in
                     switch result {
                     case .success(let res):
                         let gasUsed = res.gasUsed
@@ -285,10 +419,9 @@ class ViewController: UIViewController {
              switch result {
              case .success(let nonce):
                  print( nonce)
-                 let sendValue = try! Converter.toDrip(cfx: "1").hexStringWithPrefix // "0xde0b6b3a7640000"
-                 let gasPrice = Converter.toDrip(Gdrip: 10).hexStringWithPrefix // "0x2540be400"
-                 let hexNonce = nonce.hexStringWithPrefix
-                 storageSelf.getGcfx().getEstimateGas(from: storageSelf.fromAddress, to: storageSelf.toAddress, gasPrice: gasPrice, value: sendValue, nonce: hexNonce ) { (result) in
+                 let sendValue = try! Converter.toDrip(cfx: "1") // "0xde0b6b3a7640000"
+                 let gasPrice = Converter.toDrip(Gdrip: 10) // "0x2540be400"
+                 storageSelf.getGcfx().getEstimateGas(from: storageSelf.fromAddress, to: storageSelf.toAddress, gasPrice: gasPrice, value: sendValue, nonce: nonce ) { (result) in
                     switch result {
                     case .success(let res):
                         print( "gasUsed is \(res.gasUsed)")

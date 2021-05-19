@@ -58,7 +58,7 @@ public struct RLP {
     private static func encode(bint: BInt) -> Data? {
         let data = bint.serialize()
         if data.isEmpty {
-            return Data(bytes: [0x80])
+            return Data([0x80])
         }
         return encode(data: data)
     }
