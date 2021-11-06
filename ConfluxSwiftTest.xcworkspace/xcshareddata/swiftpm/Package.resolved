@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "OpenSSL",
+        "repositoryURL": "https://github.com/krzyzanowskim/OpenSSL.git",
+        "state": {
+          "branch": null,
+          "revision": "45545c5729b5597d2d4910a5edd07b1bf42e5839",
+          "version": "1.1.1200"
+        }
+      },
+      {
         "package": "SipHash",
         "repositoryURL": "https://github.com/attaswift/SipHash.git",
         "state": {
