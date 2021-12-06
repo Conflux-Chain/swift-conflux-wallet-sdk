@@ -23,8 +23,27 @@ let address = cfxWallet.address()
 
 ## Requirements
 
-- Swift 4.0 or later
+- Swift 5 or later
 - iOS 9.0 or later
+
+## Install (Carthage)
+    github "https://github.com/R0uter/swift-conflux-wallet-sdk"
+
+    add `NSAppTransportSecurity` → `NSExceptionDomains` located in your `Info.plist` :
+
+    ```xml
+    <key>conflux-chain.org</key>
+            <dict>
+                <key>NSExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+                <key>NSExceptionMinimumTLSVersion</key>
+                <string>TLSv1.0</string>
+                <key>NSExceptionRequiresForwardSecrecy</key>
+                <false/>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+            </dict>
+    ```
 
 ## Usage
 - Provide usage examples of related methods in Demo ConfluxSwiftTest and ConfluxOCTest

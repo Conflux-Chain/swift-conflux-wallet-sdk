@@ -20,20 +20,8 @@ public struct RawTransaction {
 }
 
 extension RawTransaction {
-    public init(value: Drip, to: String, gasPrice: Int, gasLimit: Int, nonce: Int, storageLimit: Drip, epochHeight: Drip, chainId: Int) {
+    public init(value: Drip, to:String, gasPrice: Int, gasLimit: Int, nonce: Int, data: Data = Data(), storageLimit: Drip, epochHeight: Drip, chainId: Int) {
         self.value = value
-        self.to = Address(string: to)
-        self.gasPrice = gasPrice
-        self.gasLimit = gasLimit
-        self.nonce = nonce
-        self.chainId = chainId
-        self.storageLimit = storageLimit
-        self.epochHeight = epochHeight
-        self.data = Data()
-    }
-    
-    public init(drip: String, to: String, gasPrice: Int, gasLimit: Int, nonce: Int, data: Data = Data(), storageLimit: Drip, epochHeight: Drip, chainId: Int) {
-        self.value = Drip(drip)!
         self.to = Address(string: to)
         self.gasPrice = gasPrice
         self.gasLimit = gasLimit

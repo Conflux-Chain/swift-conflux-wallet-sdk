@@ -89,7 +89,7 @@ public struct Transaction {
     }
     
     public var balance: Balance {
-        return Balance(drip: BInt(number: value, withBase: 10)!)
+        return Balance(drip: BInt(value)!)
     }
 }
 

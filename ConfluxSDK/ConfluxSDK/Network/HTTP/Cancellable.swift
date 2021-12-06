@@ -6,7 +6,7 @@
 //  Copyright © 2020 com.blockchain.dappbirds. All rights reserved.
 //
 
-public protocol Cancellable: class {
+public protocol Cancellable: AnyObject {
     func cancel()
 }
 

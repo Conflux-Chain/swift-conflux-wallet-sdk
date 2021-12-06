@@ -28,12 +28,15 @@ public class PublicKey: NSObject {
     /// generates address from its public key
     ///
     /// - Returns: address in string format
-    public func address() -> String {
-        return Address(data: addressData).string
+    public func address(prefix:String) -> String {
+        return ConfluxAddress(data: addressData)!.cip37String(prefix: prefix)
     }
     
     /// Address data generated from public key in data format
     private var addressData: Data {
-        return Crypto.hashSHA3_256(raw.dropFirst()).suffix(20)
+        var d = Array(Crypto.hashSHA3_256(raw.dropFirst()).suffix(20))
+        // 必须处理一下第一位，不然得到的地址不符合 Conflux 要求
+        d[0] = (d[0] & 0x0f) | 0x10
+        return Data(d)
     }
 }

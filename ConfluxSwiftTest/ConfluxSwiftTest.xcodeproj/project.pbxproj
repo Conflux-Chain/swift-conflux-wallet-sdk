@@ -3,22 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		83132080241F857800C9EFDD /* SipHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8313207E241F857100C9EFDD /* SipHash.framework */; };
-		83132081241F857800C9EFDD /* SipHash.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8313207E241F857100C9EFDD /* SipHash.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		833EE2B323FBD5EE00CAD85C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833EE2B223FBD5EE00CAD85C /* AppDelegate.swift */; };
 		833EE2B723FBD5EE00CAD85C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833EE2B623FBD5EE00CAD85C /* ViewController.swift */; };
 		833EE2BA23FBD5EE00CAD85C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 833EE2B823FBD5EE00CAD85C /* Main.storyboard */; };
 		833EE2BC23FBD5F300CAD85C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 833EE2BB23FBD5F300CAD85C /* Assets.xcassets */; };
 		833EE2BF23FBD5F300CAD85C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 833EE2BD23FBD5F300CAD85C /* LaunchScreen.storyboard */; };
 		833EE2CA23FBD5F300CAD85C /* ConfluxSwiftTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833EE2C923FBD5F300CAD85C /* ConfluxSwiftTestTests.swift */; };
-		8345A3D2241B94F1009DD9C2 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8345A3D0241B94EC009DD9C2 /* CryptoSwift.framework */; };
-		8345A3D3241B94F1009DD9C2 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8345A3D0241B94EC009DD9C2 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		8375C1B523FE8E6C003D5A31 /* ConfluxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 833EE2DE23FBDA5500CAD85C /* ConfluxSDK.framework */; };
-		8375C1B623FE8E6C003D5A31 /* ConfluxSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 833EE2DE23FBDA5500CAD85C /* ConfluxSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E9CD0C3825835A5200EEF08E /* ConfluxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CD0C3725835A5200EEF08E /* ConfluxSDK.framework */; };
+		E9CD0C3925835A5200EEF08E /* ConfluxSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E9CD0C3725835A5200EEF08E /* ConfluxSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,9 +34,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8345A3D3241B94F1009DD9C2 /* CryptoSwift.framework in Embed Frameworks */,
-				8375C1B623FE8E6C003D5A31 /* ConfluxSDK.framework in Embed Frameworks */,
-				83132081241F857800C9EFDD /* SipHash.framework in Embed Frameworks */,
+				E9CD0C3925835A5200EEF08E /* ConfluxSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -48,7 +42,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8313207E241F857100C9EFDD /* SipHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SipHash.framework; path = ConfluxSwiftTest/SipHash.framework; sourceTree = "<group>"; };
 		833EE2AF23FBD5EE00CAD85C /* ConfluxSwiftTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConfluxSwiftTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		833EE2B223FBD5EE00CAD85C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		833EE2B623FBD5EE00CAD85C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,9 +53,9 @@
 		833EE2C923FBD5F300CAD85C /* ConfluxSwiftTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfluxSwiftTestTests.swift; sourceTree = "<group>"; };
 		833EE2CB23FBD5F300CAD85C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		833EE2DE23FBDA5500CAD85C /* ConfluxSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ConfluxSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8345A3D0241B94EC009DD9C2 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = ConfluxSwiftTest/CryptoSwift.framework; sourceTree = "<group>"; };
 		8375C19D23FE8772003D5A31 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = ../ConfluxSDK/ConfluxSDK/CryptoSwift.framework; sourceTree = "<group>"; };
 		8375C19E23FE8772003D5A31 /* CryptoEthereumSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoEthereumSwift.framework; path = ../ConfluxSDK/ConfluxSDK/CryptoEthereumSwift.framework; sourceTree = "<group>"; };
+		E9CD0C3725835A5200EEF08E /* ConfluxSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ConfluxSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,9 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8345A3D2241B94F1009DD9C2 /* CryptoSwift.framework in Frameworks */,
-				8375C1B523FE8E6C003D5A31 /* ConfluxSDK.framework in Frameworks */,
-				83132080241F857800C9EFDD /* SipHash.framework in Frameworks */,
+				E9CD0C3825835A5200EEF08E /* ConfluxSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,8 +80,6 @@
 		833EE2A623FBD5ED00CAD85C = {
 			isa = PBXGroup;
 			children = (
-				8313207E241F857100C9EFDD /* SipHash.framework */,
-				8345A3D0241B94EC009DD9C2 /* CryptoSwift.framework */,
 				833EE2B123FBD5EE00CAD85C /* ConfluxSwiftTest */,
 				833EE2C823FBD5F300CAD85C /* ConfluxSwiftTestTests */,
 				833EE2B023FBD5EE00CAD85C /* Products */,
@@ -132,6 +121,7 @@
 		833EE2DD23FBDA5500CAD85C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E9CD0C3725835A5200EEF08E /* ConfluxSDK.framework */,
 				8375C19E23FE8772003D5A31 /* CryptoEthereumSwift.framework */,
 				8375C19D23FE8772003D5A31 /* CryptoSwift.framework */,
 				833EE2DE23FBDA5500CAD85C /* ConfluxSDK.framework */,
@@ -157,6 +147,8 @@
 			dependencies = (
 			);
 			name = ConfluxSwiftTest;
+			packageProductDependencies = (
+			);
 			productName = ConfluxSwiftTest;
 			productReference = 833EE2AF23FBD5EE00CAD85C /* ConfluxSwiftTest.app */;
 			productType = "com.apple.product-type.application";
@@ -186,7 +178,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = com.blockchain.dappbirds;
 				TargetAttributes = {
 					833EE2AE23FBD5EE00CAD85C = {
@@ -207,6 +199,9 @@
 				Base,
 			);
 			mainGroup = 833EE2A623FBD5ED00CAD85C;
+			packageReferences = (
+				E9DA1C74258A34D4006B50B3 /* XCRemoteSwiftPackageReference "CryptoSwift" */,
+			);
 			productRefGroup = 833EE2B023FBD5EE00CAD85C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -331,6 +326,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -391,6 +387,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -423,12 +420,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7CB63Y746M;
+				DEVELOPMENT_TEAM = Q2W25AN4NH;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ConfluxSwiftTest",
+					"$(PROJECT_DIR)/../Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = ConfluxSwiftTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -439,6 +438,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.blockchain.dappbirds.ConfluxSwiftTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -449,11 +449,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7CB63Y746M;
+				DEVELOPMENT_TEAM = Q2W25AN4NH;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ConfluxSwiftTest",
+					"$(PROJECT_DIR)/../Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = ConfluxSwiftTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -544,6 +545,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E9DA1C74258A34D4006B50B3 /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.8;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 833EE2A723FBD5ED00CAD85C /* Project object */;
 }

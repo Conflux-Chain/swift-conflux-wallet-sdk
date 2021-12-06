@@ -6,7 +6,6 @@
 //  Copyright © 2016-2017 Károly Lőrentey.
 //
 
-import SipHash
 
 extension BigUInt: SipHashable {
     //MARK: Hashing

@@ -16,7 +16,7 @@ public final class JSONRPC {
         }
         
         public func response(from resultObject: Any) throws -> Drip {
-            guard let response = resultObject as? String, let drip = Drip(response.lowercased().cfxStripHexPrefix(), radix: 16) else {
+            guard let response = resultObject as? String, let drip = Drip(dripHexStr: response) else {
                 throw JSONRPCError.unexpectedTypeObject(resultObject)
             }
             return drip
@@ -55,7 +55,7 @@ public final class JSONRPC {
         }
         
         public func response(from resultObject: Any) throws -> Balance {
-            guard let response = resultObject as? String, let drip = Drip(response.lowercased().cfxStripHexPrefix(), radix: 16) else {
+            guard let response = resultObject as? String, let drip = Drip(dripHexStr: response) else {
                 throw JSONRPCError.unexpectedTypeObject(resultObject)
             }
             return Balance(drip: drip)
@@ -107,15 +107,15 @@ public final class JSONRPC {
 
     
     public struct GetEstimatGas: JSONRPCRequest {
-        public typealias Response = (gasUsed:Drip, storageCollateralized: Drip)
+        public typealias Response = (gasUsed:Drip, gasLimit:Drip, storageCollateralized: Drip)
         
         public let from: String?
         public let to: String?
-        public let gasLimit: String?
-        public let gasPrice: String?
-        public let nonce: String?
-        public let value: String?
-        public let data: String?
+        public let gasLimit: Int?
+        public let gasPrice: Int?
+        public let nonce: Int?
+        public let value: Drip?
+        public let data: Data?
         
         public var method: String {
             return "cfx_estimateGasAndCollateral"
@@ -133,36 +133,42 @@ public final class JSONRPC {
             }
             
             if let gas = gasLimit {
-                txParams["gas"] = gas
+                txParams["gas"] = gas.hexStringWithPrefix
             }
             
             if let gasPrice = gasPrice {
-                txParams["gasPrice"] = gasPrice
+                txParams["gasPrice"] = gasPrice.hexStringWithPrefix
             }
             if let nonce = nonce {
-                txParams["nonce"] = nonce
+                txParams["nonce"] = nonce.hexStringWithPrefix
             }
             
             if let value = value {
-                txParams["value"] = value
+                txParams["value"] = value.hexStringWithPrefix
             }
             
             if let data = data {
-                txParams["data"] = data
+                txParams["data"] = data.hexStringWithPrefix
             }
             return [txParams]
         }
         
         public func response(from resultObject: Any) throws -> Response {
-            guard let response = resultObject as? Dictionary<String, Any>, let gasUsedStr =  response["gasUsed"] as? String, let storageCollateralizedStr = response["storageCollateralized"] as? String else{
+            guard let response = resultObject as? Dictionary<String, Any>,
+                  let gasUsedStr =  response["gasUsed"] as? String,
+                  let storageCollateralizedStr = response["storageCollateralized"] as? String,
+                  let gasLimitStr = response["gasLimit"] as? String
+            else{
                 throw JSONRPCError.unexpectedTypeObject(resultObject)
             }
             
-            guard let gasUsed = Drip(gasUsedStr.lowercased().cfxStripHexPrefix(), radix: 16) , let storageCollateralized = Drip(storageCollateralizedStr.lowercased().cfxStripHexPrefix(), radix: 16) else {
+            guard let gasUsed = Drip(dripHexStr: gasUsedStr) , let storageCollateralized = Drip(dripHexStr: storageCollateralizedStr),
+                  let gasLimit = Drip(dripHexStr: gasLimitStr)
+            else {
                 throw JSONRPCError.unexpectedTypeObject(resultObject)
             }
                         
-            return (gasUsed: gasUsed, storageCollateralized: storageCollateralized)
+            return (gasUsed: gasUsed, gasLimit:gasLimit, storageCollateralized: storageCollateralized)
         }
     }
     
@@ -191,15 +197,15 @@ public final class JSONRPC {
             txParams["to"] = to
             
             if let gas = gasLimit {
-                txParams["gas"] = gas
+                txParams["gas"] = gas.hexStringWithPrefix
             }
             
             if let gasPrice = gasPrice {
-                txParams["gasPrice"] = gasPrice
+                txParams["gasPrice"] = gasPrice.hexStringWithPrefix
             }
             
             if let value = value {
-                txParams["value"] = value
+                txParams["value"] = value.hexStringWithPrefix
             }
             
             if let data = data {
@@ -213,6 +219,54 @@ public final class JSONRPC {
             guard let response = resultObject as? Response else {
                 throw JSONRPCError.unexpectedTypeObject(resultObject)
             }
+            return response
+        }
+    }
+    
+    public struct GetTransactionStatusByHash: JSONRPCRequest {
+        public typealias Response = Int
+        
+        public let transactionHash: String
+        
+        public var method: String {
+            return "cfx_getTransactionByHash"
+        }
+        
+        public var parameters: Any? {
+            return [transactionHash]
+        }
+        
+        public func response(from resultObject: Any) throws -> Response {
+            guard let response = resultObject as? Dictionary<String, Any>,
+                  let status =  response["status"] as? String,
+                  let code = Int(status.dropFirst(2), radix: 16)
+            else{
+                throw JSONRPCError.unexpectedTypeObject(resultObject)
+            }
+                        
+            return code
+        }
+    }
+    
+    public struct GetTransactionReceiptByHash: JSONRPCRequest {
+        public typealias Response = Dictionary<String, Any>
+        
+        public let transactionHash: String
+        
+        public var method: String {
+            return "cfx_getTransactionReceipt"
+        }
+        
+        public var parameters: Any? {
+            return [transactionHash]
+        }
+        
+        public func response(from resultObject: Any) throws -> Response {
+            guard let response = resultObject as? Dictionary<String, Any>
+            else{
+                throw JSONRPCError.unexpectedTypeObject(resultObject)
+            }
+                        
             return response
         }
     }
